@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460b9c76dad5b94479248627ca158eaf, type: 3}
   m_Name: Rope
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 5760d3e68b5997e4880823f1f61f293e, type: 3}
+  sprite: {fileID: 21300000, guid: 227c61c8c04bf9a499cd16737fed9d97, type: 3}
   description: Used for climbing

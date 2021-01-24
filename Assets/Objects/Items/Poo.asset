@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460b9c76dad5b94479248627ca158eaf, type: 3}
   m_Name: Poo
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 5760d3e68b5997e4880823f1f61f293e, type: 3}
+  sprite: {fileID: 21300000, guid: aa7bbcb218752184b90beeebf25d8ecc, type: 3}
   description: We all make it. Discusting. Good fertalizer though.
