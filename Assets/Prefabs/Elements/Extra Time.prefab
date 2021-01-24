@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2069549928602910144}
   - component: {fileID: 2069549928602910145}
-  - component: {fileID: 2069549928602910158}
+  - component: {fileID: 6144263380925725939}
   - component: {fileID: 2069549928602910146}
   - component: {fileID: 2069549928602910147}
   m_Layer: 7
@@ -51,31 +51,19 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2069549928602910158}
-        m_TargetAssemblyTypeName: Common, Assembly-CSharp
-        m_MethodName: AddTime
-        m_Mode: 4
+      - m_Target: {fileID: 6144263380925725939}
+        m_TargetAssemblyTypeName: ExtraTime, Assembly-CSharp
+        m_MethodName: Pickup
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 10
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2069549928602910158}
-        m_TargetAssemblyTypeName: Common, Assembly-CSharp
-        m_MethodName: DestroyObj
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2069549928602910159}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2069549928602910158
+--- !u!114 &6144263380925725939
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -84,9 +72,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2069549928602910159}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d0f6959e1a006042a1b94760256c895, type: 3}
+  m_Script: {fileID: 11500000, guid: e4745b3b1e94f3b44b31e8fafb5b6210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  time: 10
+  sprites:
+  - time: 3
+    sprite: {fileID: 4910621133793461930, guid: 71b27c73e4c7dfd4da7e85ce4cd8f002, type: 3}
+  - time: 5
+    sprite: {fileID: 8469535324078549701, guid: 71b27c73e4c7dfd4da7e85ce4cd8f002, type: 3}
+  - time: 10
+    sprite: {fileID: 7613880322343364380, guid: 71b27c73e4c7dfd4da7e85ce4cd8f002, type: 3}
+  - time: 20
+    sprite: {fileID: -6209599587125037019, guid: 71b27c73e4c7dfd4da7e85ce4cd8f002, type: 3}
 --- !u!61 &2069549928602910146
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -153,7 +151,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 71b27c73e4c7dfd4da7e85ce4cd8f002, type: 3}
+  m_Sprite: {fileID: 7613880322343364380, guid: 71b27c73e4c7dfd4da7e85ce4cd8f002, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

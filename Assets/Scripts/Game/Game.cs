@@ -16,7 +16,13 @@ public class Game : MonoBehaviour
 	[SerializeField] Transform invContainer;
 	[SerializeField] GameObject pfInvSlot;
 	[Space]
+	[SerializeField] GameObject textbox;
+	[SerializeField] TMP_Text textBoxTitle;
+	[SerializeField] TMP_Text textBoxText;
+	[Space]
 	[NaughtyAttributes.ReadOnly] public float timeLeft;
+
+	float textBoxDisplayTime;
 
 	void Awake()
 	{
@@ -25,14 +31,9 @@ public class Game : MonoBehaviour
 		timeLeft = timeToLive;
 	}
 
-	public void UpdateHUD()
+	void Start()
 	{
-		foreach (Transform child in invContainer)
-			Destroy(child.gameObject);
-
-		foreach (var item in Player.current.inv)
-			// Very long
-			Instantiate(pfInvSlot, invContainer).transform.GetChild(0).GetComponent<Image>().sprite = item.sprite;
+		UpdateHUD();
 	}
 
 	void Update()
@@ -50,5 +51,44 @@ public class Game : MonoBehaviour
 
 		timeLeftBar.fillAmount = timeLeftFac;
 		timeLeftBar.color = color;
+
+		if (textBoxDisplayTime < 0)
+			textbox.SetActive(false);
+		textBoxDisplayTime -= Time.deltaTime;
+	}
+
+	public void UpdateHUD()
+	{
+		foreach (Transform child in invContainer)
+			Destroy(child.gameObject);
+
+		foreach (var item in Player.current.inv)
+			// Very long
+			Instantiate(pfInvSlot, invContainer).transform.GetChild(0).GetComponent<Image>().sprite = item.sprite;
+	}
+
+	public void DisplayTextBox(string title, string text)
+	{
+		textbox.SetActive(true);
+		textBoxDisplayTime = Mathf.Clamp(text.Length * 0.1f, 3, 10);
+
+		textBoxTitle.text = title;
+		textBoxText.text = text;
+	}
+
+	public void DisplayTextBox(string title, string text, float time = 0f)
+	{
+		textbox.SetActive(true);
+		textBoxDisplayTime = time;
+
+		textBoxTitle.text = title;
+		textBoxText.text = text;
+	}
+
+	public void AddTime(float time)
+	{
+		timeLeft += time;
+
+		timeLeft = Mathf.Clamp(timeLeft, 0, timeToLive);
 	}
 }

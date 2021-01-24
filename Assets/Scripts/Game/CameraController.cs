@@ -2,9 +2,17 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-	public Mover2D target;
-	public float smoothing;
-	public Transform cam;
+	// Perams
+	[SerializeField] float smoothing;
+	[SerializeField] Transform cam;
+
+	// Cache
+	Mover2D target;
+
+	void Start()
+	{
+		target = Player.current.GetComponent<Mover2D>();
+	}
 
 	void LateUpdate()
 	{

@@ -8,13 +8,11 @@ public class Item : MonoBehaviour
 	[Space]
 	public GameObject pfPickupEffect;
 
-	SpriteRenderer spr;
-
 	void Start()
 	{
-		spr = GetComponent<SpriteRenderer>();
-		spr.sprite = item.sprite;
 		name = item.name;
+
+		OnValidate();
 	}
 
 	public void Pickup()
@@ -26,9 +24,14 @@ public class Item : MonoBehaviour
 		Destroy(gameObject);
 	}
 
-	void OnDrawGizmos()
+	void OnValidate()
 	{
-		Gizmos.color = new Color(0, 0, 1, 0.25f);
-		Gizmos.DrawCube(transform.position, Vector3.one);
+		GetComponent<SpriteRenderer>().sprite = item.sprite;
 	}
+
+	// void OnDrawGizmos()
+	// {
+	// 	Gizmos.color = new Color(0, 0, 1, 0.25f);
+	// 	Gizmos.DrawCube(transform.position, Vector3.one);
+	// }
 }
