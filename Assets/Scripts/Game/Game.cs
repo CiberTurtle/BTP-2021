@@ -20,9 +20,15 @@ public class Game : MonoBehaviour
 	[SerializeField] TMP_Text textBoxTitle;
 	[SerializeField] TMP_Text textBoxText;
 	[Space]
+	[SerializeField] GameObject itemBox;
+	[SerializeField] TMP_Text itemBoxTitle;
+	[SerializeField] TMP_Text itemBoxText;
+	[SerializeField] Image itemBoxIcon;
+	[Space]
 	[NaughtyAttributes.ReadOnly] public float timeLeft;
 
-	float textBoxDisplayTime;
+	float textBoxDisplayTime = 0;
+	float itemBoxDisplayTime = 0;
 	bool unlimitedTime = false;
 
 	Inputs inputs;
@@ -73,6 +79,10 @@ public class Game : MonoBehaviour
 		if (textBoxDisplayTime < 0)
 			textbox.SetActive(false);
 		textBoxDisplayTime -= Time.deltaTime;
+
+		if (itemBoxDisplayTime < 0)
+			itemBox.SetActive(false);
+		itemBoxDisplayTime -= Time.deltaTime;
 	}
 
 	public void UpdateHUD()
@@ -86,7 +96,7 @@ public class Game : MonoBehaviour
 
 	public void DisplayTextBox(string title, string text)
 	{
-		DisplayTextBox(title, text, Mathf.Clamp(text.Length * 0.1f, 3, 10));
+		DisplayTextBox(title, text, Mathf.Clamp(text.Length * 0.075f, 3, 8));
 	}
 
 	public void DisplayTextBox(string title, string text, float time = 0f)
@@ -96,6 +106,16 @@ public class Game : MonoBehaviour
 
 		textBoxTitle.text = title;
 		textBoxText.text = text;
+	}
+
+	public void DisplayItemBox(SOItem item)
+	{
+		itemBox.SetActive(true);
+		itemBoxDisplayTime = Mathf.Clamp(item.name.Length * 0.15f + item.description.Length * 0.05f, 3, 10);
+
+		itemBoxTitle.text = $"You Picked Up: {item.name}!";
+		itemBoxText.text = item.description;
+		itemBoxIcon.sprite = item.sprite;
 	}
 
 	public void AddTime(float time)
