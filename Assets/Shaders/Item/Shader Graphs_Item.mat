@@ -38,5 +38,6 @@ Material:
     m_Floats:
     - _HoverSize: 0.075
     - _HoverSpeed: 2
+    - _WaveSize: 0.1
     m_Colors: []
   m_BuildTextureStacks: []
