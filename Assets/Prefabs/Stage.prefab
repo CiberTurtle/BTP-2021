@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shadowColor: {r: 0, g: 0, b: 0, a: 0.101960786}
-  shadowOffset: {x: -0.15, y: -0.15, z: 0}
+  shadowOffset: {x: -0.125, y: -0.125, z: 0}
   baseTilemap: {fileID: 5944170134315310528}
 --- !u!66 &5944170133477583539
 CompositeCollider2D:
@@ -1689,7 +1689,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 769630343
-  m_SortingLayer: -2
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

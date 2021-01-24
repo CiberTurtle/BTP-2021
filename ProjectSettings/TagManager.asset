@@ -45,11 +45,23 @@ TagManager:
   - name: Ground
     uniqueID: 769630343
     locked: 0
+  - name: Element
+    uniqueID: 2396471263
+    locked: 0
+  - name: NPC
+    uniqueID: 3546720663
+    locked: 0
   - name: Player
     uniqueID: 1598615625
     locked: 0
+  - name: Item
+    uniqueID: 369411683
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Effect
+    uniqueID: 72057209
     locked: 0
   - name: UI
     uniqueID: 3670775661

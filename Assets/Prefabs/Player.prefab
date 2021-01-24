@@ -244,8 +244,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1598615625
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
   m_Color: {r: 0, g: 0.6666665, b: 1, a: 1}
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15254926a0fa4142b0a0b63bbb47500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionSize: 1
+  interactionSize: 1.5
   interactableLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -334,7 +334,7 @@ MonoBehaviour:
   fAccelerationTimeGrounded: 0.05
   fAccelerationTimeAirborne: 0.1
   fJumpRem: 0.1
-  fGroundedRem: 0.1
+  fGroundedRem: 0.2
   fWallSlideSpeedMax: 3
   fWallStickTime: 0.25
   v2WallJumpClimb: {x: 0, y: 0}

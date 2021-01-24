@@ -62,6 +62,9 @@ public class Player : MonoBehaviour
 
 		interactableObj = closestItem?.GetComponent<Interactable>();
 
+		if (!mover.bIsGrounded)
+			interactableObj = null;
+
 		if (interactableObj)
 		{
 			interatableUI.gameObject.SetActive(true);

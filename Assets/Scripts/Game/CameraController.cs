@@ -3,8 +3,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
 	// Perams
+	[SerializeField] bool snapCam;
 	[SerializeField] float smoothing;
-	[SerializeField] Transform cam;
 	[SerializeField] float alwaysFollowRange;
 
 	// Data
@@ -23,13 +23,17 @@ public class CameraController : MonoBehaviour
 
 	void LateUpdate()
 	{
+		if (snapCam)
+		{
+			transform.position = target.transform.position;
+			return;
+		}
+
 		if (target.bIsGrounded || Vector2.SqrMagnitude(transform.position - target.transform.position) > sqAlwaysFollowRange)
 			gotoPos = target.transform.position;
 		else
 			gotoPos.x = target.transform.position.x;
 
-		cam.position = Vector2.Lerp(cam.position, gotoPos, smoothing * Time.deltaTime * 10);
-
-		// cam.position = target.transform.position;
+		transform.position = Vector2.Lerp(transform.position, gotoPos, smoothing * Time.deltaTime * 10);
 	}
 }

@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8026c5d73eebe09419425f7e7b526535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requestedItem: {fileID: 11400000, guid: 7f6f0f341ab42e340b3f43c1a35da74b, type: 2}
+  requestedItem: {fileID: 0}
   startText: I like to code, but I don't have any code :(
   duringText: Pls give code
   givenText: thx for the help
@@ -146,8 +146,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -748246633
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 295a0910524fd6249a423dd40cf74eb5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
