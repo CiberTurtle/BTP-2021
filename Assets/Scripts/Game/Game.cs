@@ -38,8 +38,8 @@ public class Game : MonoBehaviour
 
 	void Update()
 	{
-		// if (timeLeft < 0)
-		//	SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		if (timeLeft < 0)
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
 		timeLeft -= Time.deltaTime;
 
@@ -69,11 +69,7 @@ public class Game : MonoBehaviour
 
 	public void DisplayTextBox(string title, string text)
 	{
-		textbox.SetActive(true);
-		textBoxDisplayTime = Mathf.Clamp(text.Length * 0.1f, 3, 10);
-
-		textBoxTitle.text = title;
-		textBoxText.text = text;
+		DisplayTextBox(title, text, Mathf.Clamp(text.Length * 0.1f, 3, 10));
 	}
 
 	public void DisplayTextBox(string title, string text, float time = 0f)
