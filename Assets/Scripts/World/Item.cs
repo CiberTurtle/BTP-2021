@@ -26,7 +26,7 @@ public class Item : MonoBehaviour
 
 	void OnValidate()
 	{
-		GetComponent<SpriteRenderer>().sprite = item.sprite;
+		GetComponent<SpriteRenderer>().sprite = item?.sprite;
 	}
 
 	// void OnDrawGizmos()

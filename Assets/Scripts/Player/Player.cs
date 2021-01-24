@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -46,7 +47,20 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
-		interactableObj = Physics2D.OverlapCircle(transform.position, interactionSize, interactableLayer)?.GetComponent<Interactable>();
+		Collider2D closestItem = null;
+		var closestDist = float.PositiveInfinity;
+
+		foreach (var item in Physics2D.OverlapCircleAll(transform.position, interactionSize, interactableLayer))
+		{
+			var dist = Vector2.SqrMagnitude(transform.position + item.transform.position);
+			if (dist < closestDist)
+			{
+				closestItem = item;
+				closestDist = dist;
+			}
+		}
+
+		interactableObj = closestItem?.GetComponent<Interactable>();
 
 		if (interactableObj)
 		{

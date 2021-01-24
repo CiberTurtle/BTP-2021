@@ -100,6 +100,33 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Game"",
+            ""id"": ""bc71d51b-0b77-49c8-8ead-f99f5d6ea75f"",
+            ""actions"": [
+                {
+                    ""name"": ""UnlimitedTime"",
+                    ""type"": ""Button"",
+                    ""id"": ""ed7d0c40-b5f1-486f-892a-6360293ca462"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e554cdbf-26b5-43bf-9c1d-fc4f18b9c4ca"",
+                    ""path"": ""<Keyboard>/rightBracket"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""UnlimitedTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -126,6 +153,9 @@ public class @Inputs : IInputActionCollection, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        // Game
+        m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
+        m_Game_UnlimitedTime = m_Game.FindAction("UnlimitedTime", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -220,6 +250,39 @@ public class @Inputs : IInputActionCollection, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // Game
+    private readonly InputActionMap m_Game;
+    private IGameActions m_GameActionsCallbackInterface;
+    private readonly InputAction m_Game_UnlimitedTime;
+    public struct GameActions
+    {
+        private @Inputs m_Wrapper;
+        public GameActions(@Inputs wrapper) { m_Wrapper = wrapper; }
+        public InputAction @UnlimitedTime => m_Wrapper.m_Game_UnlimitedTime;
+        public InputActionMap Get() { return m_Wrapper.m_Game; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GameActions set) { return set.Get(); }
+        public void SetCallbacks(IGameActions instance)
+        {
+            if (m_Wrapper.m_GameActionsCallbackInterface != null)
+            {
+                @UnlimitedTime.started -= m_Wrapper.m_GameActionsCallbackInterface.OnUnlimitedTime;
+                @UnlimitedTime.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnUnlimitedTime;
+                @UnlimitedTime.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnUnlimitedTime;
+            }
+            m_Wrapper.m_GameActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @UnlimitedTime.started += instance.OnUnlimitedTime;
+                @UnlimitedTime.performed += instance.OnUnlimitedTime;
+                @UnlimitedTime.canceled += instance.OnUnlimitedTime;
+            }
+        }
+    }
+    public GameActions @Game => new GameActions(this);
     private int m_KeyboardSchemeIndex = -1;
     public InputControlScheme KeyboardScheme
     {
@@ -234,5 +297,9 @@ public class @Inputs : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface IGameActions
+    {
+        void OnUnlimitedTime(InputAction.CallbackContext context);
     }
 }

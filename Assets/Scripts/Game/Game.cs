@@ -23,13 +23,30 @@ public class Game : MonoBehaviour
 	[NaughtyAttributes.ReadOnly] public float timeLeft;
 
 	float textBoxDisplayTime;
+	bool unlimitedTime = false;
+
+	Inputs inputs;
 
 	void Awake()
 	{
 		current = this;
 
+		inputs = new Inputs();
+
+#if UNITY_EDITOR
+		inputs.Game.UnlimitedTime.performed += (x) =>
+		{
+			unlimitedTime = !unlimitedTime;
+
+			DisplayTextBox("[ Game ]", unlimitedTime ? "Toggled Unlimited Time On" : "Toggled Unlimited Time Off", 1.5f);
+		};
+#endif
+
 		timeLeft = timeToLive;
 	}
+
+	void OnEnable() => inputs.Enable();
+	void OnDisable() => inputs.Disable();
 
 	void Start()
 	{
@@ -41,7 +58,8 @@ public class Game : MonoBehaviour
 		if (timeLeft < 0)
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-		timeLeft -= Time.deltaTime;
+		if (!unlimitedTime)
+			timeLeft -= Time.deltaTime;
 
 		var timeLeftFac = timeLeft / timeToLive;
 		var color = timeColor.Evaluate(timeLeftFac);
@@ -63,7 +81,6 @@ public class Game : MonoBehaviour
 			Destroy(child.gameObject);
 
 		foreach (var item in Player.current.inv)
-			// Very long
 			Instantiate(pfInvSlot, invContainer).transform.GetChild(0).GetComponent<Image>().sprite = item.sprite;
 	}
 
