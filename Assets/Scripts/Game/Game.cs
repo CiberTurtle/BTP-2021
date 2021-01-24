@@ -38,7 +38,7 @@ public class Game : MonoBehaviour
 		{
 			unlimitedTime = !unlimitedTime;
 
-			DisplayTextBox("[ Game ]", unlimitedTime ? "Toggled Unlimited Time On" : "Toggled Unlimited Time Off", 1.5f);
+			DisplayTextBox("[ Game ]", unlimitedTime ? "Toggled Unlimited Time <color=green>On</color>" : "Toggled Unlimited Time <color=red>Off</color>", 1.5f);
 		};
 #endif
 
