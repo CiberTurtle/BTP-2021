@@ -49,7 +49,19 @@ MonoBehaviour:
   includeNameOfGO: 1
   onInteract:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2631123116085489634}
+        m_TargetAssemblyTypeName: UnityEngine.SpriteRenderer, UnityEngine
+        m_MethodName: set_sprite
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: -4454914845596493489, guid: a3203432716b88b44b7a975eed6ed1be, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Sprite, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!212 &2631123116085489634
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -88,7 +100,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1898496033
-  m_SortingLayer: -3
+  m_SortingLayer: -4
   m_SortingOrder: 0
   m_Sprite: {fileID: 1694985531360637023, guid: a3203432716b88b44b7a975eed6ed1be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
