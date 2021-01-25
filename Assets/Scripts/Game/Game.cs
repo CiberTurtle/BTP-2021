@@ -25,6 +25,8 @@ public class Game : MonoBehaviour
 	[SerializeField] TMP_Text itemBoxText;
 	[SerializeField] Image itemBoxIcon;
 	[Space]
+	[SerializeField] UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera cam;
+	[Space]
 	[NaughtyAttributes.ReadOnly] public float timeLeft;
 
 	float textBoxDisplayTime = 0;
@@ -56,6 +58,8 @@ public class Game : MonoBehaviour
 
 	void Start()
 	{
+		cam.enabled = Screen.width % 2 == 0 && Screen.height % 2 == 0;
+
 		UpdateHUD();
 	}
 
