@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Egg
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: fdc8d124350dc5b4fad910ca5de7fb3d, type: 3}
-  description: Layed by chickens.
+  description: Laid by chickens.

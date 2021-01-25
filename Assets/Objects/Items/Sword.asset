@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 5760d3e68b5997e4880823f1f61f293e, type: 3}
-  description: 
+  description: A metal stick with a handle, wrist guard, and a pointy bit at the
+    end.
