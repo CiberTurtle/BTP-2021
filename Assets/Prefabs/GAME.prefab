@@ -322,7 +322,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4389705022873908114}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4389705021398213933
 MonoBehaviour:
@@ -541,7 +541,7 @@ RectTransform:
   - {fileID: 682139581852108436}
   - {fileID: 1366914263772791464}
   m_Father: {fileID: 4389705022873908114}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -980,7 +980,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4389705022873908114}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4389705022597876128
 MonoBehaviour:
@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: abbc38bf21cc573187a0df2ddf3fd78e97a966d349f0485f63c604160000000079814b046d97cbda
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -1091,9 +1091,9 @@ Transform:
   m_Children:
   - {fileID: 4389705021093470609}
   - {fileID: 8284652745330647735}
-  - {fileID: 4389705022597876129}
   - {fileID: 4389705021728804252}
   - {fileID: 4389705021398213932}
+  - {fileID: 4389705022597876129}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2367,6 +2367,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a65ea2a0d59b7d5418cc29a6d99486c1, type: 3}
+--- !u!224 &5452695306356341706 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7437519360861497577, guid: a65ea2a0d59b7d5418cc29a6d99486c1, type: 3}
+  m_PrefabInstance: {fileID: 3214652102566630179}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1736698912143334401 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3784505260218650402, guid: a65ea2a0d59b7d5418cc29a6d99486c1, type: 3}
@@ -2378,11 +2383,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &5452695306356341706 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7437519360861497577, guid: a65ea2a0d59b7d5418cc29a6d99486c1, type: 3}
-  m_PrefabInstance: {fileID: 3214652102566630179}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4241629898747592162
 PrefabInstance:
   m_ObjectHideFlags: 0
