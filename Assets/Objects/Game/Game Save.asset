@@ -13,9 +13,5 @@ MonoBehaviour:
   m_Name: Game Save
   m_EditorClassIdentifier: 
   gemsLeft:
-  - {fileID: 11400000, guid: cc4398c3ee562f740b063145197f2928, type: 2}
   - {fileID: 11400000, guid: 115a51518c0babb4ba247991224f4b6d, type: 2}
-  - {fileID: 11400000, guid: 5afcd2e15413b894e8d0b23aa00644d2, type: 2}
-  - {fileID: 11400000, guid: 277f94976644813449ae3964f664d25a, type: 2}
-  - {fileID: 11400000, guid: e2a1acbcc6b3c774aa44858c8c4e2c1a, type: 2}
   currentTime: 0

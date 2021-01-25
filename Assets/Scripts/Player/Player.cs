@@ -101,6 +101,7 @@ public class Player : MonoBehaviour
 	public void AddItem(SOItem item)
 	{
 		inv.Add(item);
+		Game.current.DisplayItemBox(item);
 		Game.current.UpdateHUD();
 	}
 

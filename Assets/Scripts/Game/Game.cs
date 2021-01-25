@@ -30,7 +30,6 @@ public class Game : MonoBehaviour
 	[Space]
 	[SerializeField] GameObject pauseMenu;
 	[Space]
-	public SOGameSave gameSave;
 	public SOGameSave resetGameSave;
 	[SerializeField] UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera cam;
 	[Space]
@@ -38,6 +37,7 @@ public class Game : MonoBehaviour
 	[NaughtyAttributes.ReadOnly] public float timeLeft;
 	[NaughtyAttributes.ReadOnly] public float timeAlive;
 
+	[HideInInspector] public static SOGameSave gameSave = null;
 	float textBoxDisplayTime = 0;
 	float itemBoxDisplayTime = 0;
 	bool unlimitedTime = false;
@@ -58,7 +58,7 @@ public class Game : MonoBehaviour
 			DisplayTextBox("[ Game ]", unlimitedTime ? "Toggled Unlimited Time <color=green>On</color>" : "Toggled Unlimited Time <color=red>Off</color>", 1.5f);
 		};
 
-		gameSave = resetGameSave;
+		if (gameSave == null) gameSave = Instantiate(resetGameSave);
 #endif
 
 		timeLeft = timeToLive;
@@ -170,7 +170,7 @@ public class Game : MonoBehaviour
 
 	public void Restart()
 	{
-		gameSave = resetGameSave;
+		gameSave = Instantiate(resetGameSave);
 
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}

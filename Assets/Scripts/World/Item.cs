@@ -21,8 +21,6 @@ public class Item : MonoBehaviour
 
 		if (pfPickupEffect) Instantiate(pfPickupEffect);
 
-		Game.current.DisplayItemBox(item);
-
 		Destroy(gameObject);
 	}
 
