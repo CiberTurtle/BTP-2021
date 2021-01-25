@@ -113,7 +113,7 @@ public class Game : MonoBehaviour
 		itemBoxDisplayTime -= Time.deltaTime;
 
 		timeText.text =
-		TimeSpan.FromSeconds(timeAlive).ToString(@"mm\:ss") + " / " + TimeSpan.FromSeconds(gameSave.currentTime).ToString(@"mm\:ss");
+		TimeSpan.FromSeconds(timeAlive).ToString(@"m\:ss") + " / " + TimeSpan.FromSeconds(gameSave.currentTime).ToString(@"m\:ss");
 	}
 
 	public void UpdateHUD()
