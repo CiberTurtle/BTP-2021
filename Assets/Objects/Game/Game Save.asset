@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb772d82c80af5541944a594ec0f9136, type: 3}
+  m_Name: Game Save
+  m_EditorClassIdentifier: 
+  gemsLeft:
+  - {fileID: 11400000, guid: cc4398c3ee562f740b063145197f2928, type: 2}
+  - {fileID: 11400000, guid: 115a51518c0babb4ba247991224f4b6d, type: 2}
+  - {fileID: 11400000, guid: 5afcd2e15413b894e8d0b23aa00644d2, type: 2}
+  - {fileID: 11400000, guid: 277f94976644813449ae3964f664d25a, type: 2}
+  - {fileID: 11400000, guid: e2a1acbcc6b3c774aa44858c8c4e2c1a, type: 2}
+  currentTime: 0

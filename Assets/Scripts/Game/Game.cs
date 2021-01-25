@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System;
 
 public class Game : MonoBehaviour
 {
@@ -25,12 +26,17 @@ public class Game : MonoBehaviour
 	[SerializeField] TMP_Text itemBoxText;
 	[SerializeField] Image itemBoxIcon;
 	[Space]
+	[SerializeField] TMP_Text timeText;
+	[Space]
 	[SerializeField] GameObject pauseMenu;
 	[Space]
+	public SOGameSave gameSave;
+	public SOGameSave resetGameSave;
 	[SerializeField] UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera cam;
 	[Space]
 	[NaughtyAttributes.ReadOnly] public bool PAUSED = false;
 	[NaughtyAttributes.ReadOnly] public float timeLeft;
+	[NaughtyAttributes.ReadOnly] public float timeAlive;
 
 	float textBoxDisplayTime = 0;
 	float itemBoxDisplayTime = 0;
@@ -51,6 +57,8 @@ public class Game : MonoBehaviour
 
 			DisplayTextBox("[ Game ]", unlimitedTime ? "Toggled Unlimited Time <color=green>On</color>" : "Toggled Unlimited Time <color=red>Off</color>", 1.5f);
 		};
+
+		gameSave = resetGameSave;
 #endif
 
 		timeLeft = timeToLive;
@@ -79,6 +87,8 @@ public class Game : MonoBehaviour
 			pauseMenu.SetActive(false);
 		}
 
+		timeAlive += Time.deltaTime;
+
 		if (timeLeft < 0)
 			Respawn();
 
@@ -101,6 +111,9 @@ public class Game : MonoBehaviour
 		if (itemBoxDisplayTime < 0)
 			itemBox.SetActive(false);
 		itemBoxDisplayTime -= Time.deltaTime;
+
+		timeText.text =
+		TimeSpan.FromSeconds(timeAlive).ToString(@"mm\:ss") + " / " + TimeSpan.FromSeconds(gameSave.currentTime).ToString(@"mm\:ss");
 	}
 
 	public void UpdateHUD()
@@ -150,16 +163,25 @@ public class Game : MonoBehaviour
 
 	public void Respawn()
 	{
+		gameSave.currentTime += timeAlive;
+
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
 	public void Restart()
 	{
+		gameSave = resetGameSave;
+
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
 	public void Exit()
 	{
 		Application.Quit();
+	}
+
+	public void End()
+	{
+		Debug.Log("YOU BEAT THE GAME!!! pog");
 	}
 }
