@@ -25,6 +25,8 @@ public class Game : MonoBehaviour
 	[SerializeField] TMP_Text itemBoxText;
 	[SerializeField] Image itemBoxIcon;
 	[Space]
+	[SerializeField] GameObject pauseMenu;
+	[Space]
 	[SerializeField] UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera cam;
 	[Space]
 	[NaughtyAttributes.ReadOnly] public bool PAUSED = false;
@@ -66,11 +68,19 @@ public class Game : MonoBehaviour
 
 	void Update()
 	{
-		if (PAUSED) Time.timeScale = 0;
-		else Time.timeScale = 1;
+		if (PAUSED)
+		{
+			Time.timeScale = 0;
+			pauseMenu.SetActive(true);
+		}
+		else
+		{
+			Time.timeScale = 1;
+			pauseMenu.SetActive(false);
+		}
 
 		if (timeLeft < 0)
-			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+			Respawn();
 
 		if (!unlimitedTime)
 			timeLeft -= Time.deltaTime;
@@ -131,5 +141,25 @@ public class Game : MonoBehaviour
 		timeLeft += time;
 
 		timeLeft = Mathf.Clamp(timeLeft, 0, timeToLive);
+	}
+
+	public void Resume()
+	{
+		PAUSED = false;
+	}
+
+	public void Respawn()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
+
+	public void Restart()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
+
+	public void Exit()
+	{
+
 	}
 }
