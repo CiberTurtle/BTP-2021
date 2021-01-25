@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Scrambled eggs
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: b2d64eebcc15b6942850dff21461b9a4, type: 3}
-  description: Yummy food.
+  description: 'Cooked eggs scrambled. Great for breakfast. '

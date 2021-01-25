@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460b9c76dad5b94479248627ca158eaf, type: 3}
   m_Name: Coacoa Beans
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: -7255497285719700247, guid: 11960f8f79a0dc148b72e7e89dcbda82, type: 3}
   description: 'Bitter on their own but they make the best substance in the universe:
     Chocolate.'
