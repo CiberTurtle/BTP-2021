@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 		inputs.Player.Move.performed += (x) => mover.v2MoveInput.x = x.ReadValue<float>();
 		inputs.Player.Jump.performed += (x) => mover.JumpDown();
 		inputs.Player.Jump.canceled += (x) => mover.JumpUp();
-		inputs.Player.Interact.performed += (x) => Interact();
+		inputs.Player.Interact.performed += (x) => { if (!Game.current.PAUSED) Interact(); };
 	}
 
 	void Start()
@@ -47,6 +47,8 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
+		if (Game.current.PAUSED) return;
+
 		Collider2D closestItem = null;
 		var closestDist = float.PositiveInfinity;
 

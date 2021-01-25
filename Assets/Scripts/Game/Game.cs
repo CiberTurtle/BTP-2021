@@ -27,6 +27,7 @@ public class Game : MonoBehaviour
 	[Space]
 	[SerializeField] UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera cam;
 	[Space]
+	[NaughtyAttributes.ReadOnly] public bool PAUSED = false;
 	[NaughtyAttributes.ReadOnly] public float timeLeft;
 
 	float textBoxDisplayTime = 0;
@@ -40,7 +41,7 @@ public class Game : MonoBehaviour
 		current = this;
 
 		inputs = new Inputs();
-
+		inputs.Game.Pause.performed += (x) => PAUSED = !PAUSED;
 #if UNITY_EDITOR
 		inputs.Game.UnlimitedTime.performed += (x) =>
 		{
@@ -65,6 +66,9 @@ public class Game : MonoBehaviour
 
 	void Update()
 	{
+		if (PAUSED) Time.timeScale = 0;
+		else Time.timeScale = 1;
+
 		if (timeLeft < 0)
 			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 

@@ -112,6 +112,14 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""03f747ef-521d-4f77-8c45-8a3071c686a5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -123,6 +131,17 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""UnlimitedTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a7d6878-34c3-4ffc-a376-3caedd6e73be"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -156,6 +175,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         // Game
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
         m_Game_UnlimitedTime = m_Game.FindAction("UnlimitedTime", throwIfNotFound: true);
+        m_Game_Pause = m_Game.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -255,11 +275,13 @@ public class @Inputs : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Game;
     private IGameActions m_GameActionsCallbackInterface;
     private readonly InputAction m_Game_UnlimitedTime;
+    private readonly InputAction m_Game_Pause;
     public struct GameActions
     {
         private @Inputs m_Wrapper;
         public GameActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @UnlimitedTime => m_Wrapper.m_Game_UnlimitedTime;
+        public InputAction @Pause => m_Wrapper.m_Game_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -272,6 +294,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @UnlimitedTime.started -= m_Wrapper.m_GameActionsCallbackInterface.OnUnlimitedTime;
                 @UnlimitedTime.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnUnlimitedTime;
                 @UnlimitedTime.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnUnlimitedTime;
+                @Pause.started -= m_Wrapper.m_GameActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_GameActionsCallbackInterface = instance;
             if (instance != null)
@@ -279,6 +304,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @UnlimitedTime.started += instance.OnUnlimitedTime;
                 @UnlimitedTime.performed += instance.OnUnlimitedTime;
                 @UnlimitedTime.canceled += instance.OnUnlimitedTime;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -301,5 +329,6 @@ public class @Inputs : IInputActionCollection, IDisposable
     public interface IGameActions
     {
         void OnUnlimitedTime(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
