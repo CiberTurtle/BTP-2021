@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   time: 10
+  respawnTime: 60
   sprites:
   - time: 3
     sprite: {fileID: 4910621133793461930, guid: 71b27c73e4c7dfd4da7e85ce4cd8f002, type: 3}

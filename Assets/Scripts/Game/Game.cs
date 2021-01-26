@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using System;
+using DG.Tweening;
 
 public class Game : MonoBehaviour
 {
@@ -17,11 +18,11 @@ public class Game : MonoBehaviour
 	[SerializeField] Transform invContainer;
 	[SerializeField] GameObject pfInvSlot;
 	[Space]
-	[SerializeField] GameObject textbox;
+	[SerializeField] CanvasGroup textbox;
 	[SerializeField] TMP_Text textBoxTitle;
 	[SerializeField] TMP_Text textBoxText;
 	[Space]
-	[SerializeField] GameObject itemBox;
+	[SerializeField] CanvasGroup itemBox;
 	[SerializeField] TMP_Text itemBoxTitle;
 	[SerializeField] TMP_Text itemBoxText;
 	[SerializeField] Image itemBoxIcon;
@@ -40,8 +41,6 @@ public class Game : MonoBehaviour
 
 	[HideInInspector] public static SOGameSave gameSave = null;
 	[HideInInspector] public int npcsToHelp;
-	float textBoxDisplayTime = 0;
-	float itemBoxDisplayTime = 0;
 	bool unlimitedTime = false;
 
 	Inputs inputs;
@@ -106,14 +105,6 @@ public class Game : MonoBehaviour
 		timeLeftBar.fillAmount = timeLeftFac;
 		timeLeftBar.color = color;
 
-		if (textBoxDisplayTime < 0)
-			textbox.SetActive(false);
-		textBoxDisplayTime -= Time.deltaTime;
-
-		if (itemBoxDisplayTime < 0)
-			itemBox.SetActive(false);
-		itemBoxDisplayTime -= Time.deltaTime;
-
 		timeText.text =
 		TimeSpan.FromSeconds(timeAlive).ToString(@"m\:ss") + " / " + TimeSpan.FromSeconds(gameSave.currentTime).ToString(@"m\:ss");
 		completionText.text = $"{gameSave.npcsHelped} / {npcsToHelp}";
@@ -124,8 +115,15 @@ public class Game : MonoBehaviour
 		foreach (Transform child in invContainer)
 			Destroy(child.gameObject);
 
+		int index = 0;
 		foreach (var item in Player.current.inv)
-			Instantiate(pfInvSlot, invContainer).transform.GetChild(0).GetComponent<Image>().sprite = item.sprite;
+		{
+			var box = Instantiate(pfInvSlot, invContainer).transform.GetChild(0).GetComponent<Image>();
+			box.sprite = item.sprite;
+			box.DOColor(Color.white, index * 0.05f);
+
+			index++;
+		}
 	}
 
 	public void HelpedNPC()
@@ -143,8 +141,11 @@ public class Game : MonoBehaviour
 
 	public void DisplayTextBox(string title, string text, float time = 0f)
 	{
-		textbox.SetActive(true);
-		textBoxDisplayTime = time;
+		textbox.alpha = 0;
+		textbox.transform.localScale = new Vector3(1.25f, 1.25f, 1f);
+		textbox.transform.DOScale(Vector3.one, 0.1f);
+		textbox.DOFade(1f, 0.1f)
+		.OnComplete(() => textbox.DOFade(0, 1f).SetDelay(time));
 
 		textBoxTitle.text = title;
 		textBoxText.text = text;
@@ -152,8 +153,11 @@ public class Game : MonoBehaviour
 
 	public void DisplayItemBox(SOItem item)
 	{
-		itemBox.SetActive(true);
-		itemBoxDisplayTime = Mathf.Clamp(item.name.Length * 0.15f + item.description.Length * 0.05f, 3, 10);
+		itemBox.alpha = 0;
+		itemBox.transform.localScale = new Vector3(1.25f, 1.25f, 1f);
+		itemBox.transform.DOScale(Vector3.one, 0.1f);
+		itemBox.DOFade(1f, 0.1f)
+		.OnComplete(() => itemBox.DOFade(0, 1f).SetDelay(Mathf.Clamp(item.name.Length * 0.15f + item.description.Length * 0.05f, 3, 10)));
 
 		itemBoxTitle.text = $"You Picked Up: {item.name}!";
 		itemBoxText.text = item.description;
