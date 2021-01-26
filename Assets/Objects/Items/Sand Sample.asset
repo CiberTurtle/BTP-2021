@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 460b9c76dad5b94479248627ca158eaf, type: 3}
-  m_Name: Sand stone sample
+  m_Name: Sand Sample
   m_EditorClassIdentifier: 
   sprite: {fileID: -7255497285719700247, guid: d48d4d33fed033542aca0c3f4dd1770a, type: 3}
   description: Some sand stone.
