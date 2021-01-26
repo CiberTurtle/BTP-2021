@@ -24,16 +24,28 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 8400000, guid: f706ff5f2e72b0a468d010937fc94fdc, type: 2}
+        m_Texture: {fileID: 2800000, guid: f0e55af9e2bc18544ba95f5f54f8feb9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - AltTurnSpeed: 5
-    - WaveSize: 0.1
+    - AltTurnSpeed: 2.5
+    - WaveSize: 0.05
     - _WaveSpeed: 1.5
     m_Colors:
-    - FoamColor: {r: 1, g: 1, b: 1, a: 0}
-    - WaterAltFallSpeed: {r: 0.1, g: 0.5, b: 0, a: 0}
-    - WaterFallSpeed: {r: 0, g: 1, b: 0, a: 0}
+    - FoamColor: {r: 1, g: 1, b: 1, a: 1}
+    - WaterAltFallSpeed: {r: 0.05, g: 0.1, b: 0, a: 0}
+    - WaterFallSpeed: {r: 0, g: 0.25, b: 0, a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
