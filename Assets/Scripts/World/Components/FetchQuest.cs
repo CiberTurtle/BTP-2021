@@ -77,6 +77,6 @@ public class FetchQuest : MonoBehaviour
 				break;
 		}
 
-		status.sprite = sprites.Find((x) => x.state == state).sprite;
+		if (countTowardsCompletion) status.sprite = sprites.Find((x) => x.state == state).sprite;
 	}
 }
