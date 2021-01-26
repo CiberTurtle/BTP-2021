@@ -37,7 +37,15 @@ public class FetchQuest : MonoBehaviour
 
 	void OnEnable()
 	{
-		Game.current.npcsToHelp++;
+		if (countTowardsCompletion)
+		{
+			status.sprite = sprites.Find((x) => x.state == state).sprite;
+			Game.current.npcsToHelp++;
+		}
+		else
+		{
+			status.sprite = null;
+		}
 	}
 
 	public void Interact()
