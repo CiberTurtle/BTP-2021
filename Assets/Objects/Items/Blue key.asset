@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460b9c76dad5b94479248627ca158eaf, type: 3}
   m_Name: Blue key
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 5760d3e68b5997e4880823f1f61f293e, type: 3}
-  description: A key for a blue door.
+  sprite: {fileID: 21300000, guid: 62f26b731c48f6c418c24f7f82fa059b, type: 3}
+  description: A key for a <color=blue>blue</color> door.
