@@ -27,6 +27,7 @@ public class Game : MonoBehaviour
 	[SerializeField] Image itemBoxIcon;
 	[Space]
 	[SerializeField] TMP_Text timeText;
+	[SerializeField] TMP_Text completionText;
 	[Space]
 	[SerializeField] GameObject pauseMenu;
 	[Space]
@@ -38,6 +39,7 @@ public class Game : MonoBehaviour
 	[NaughtyAttributes.ReadOnly] public float timeAlive;
 
 	[HideInInspector] public static SOGameSave gameSave = null;
+	[HideInInspector] public int npcsToHelp;
 	float textBoxDisplayTime = 0;
 	float itemBoxDisplayTime = 0;
 	bool unlimitedTime = false;
@@ -114,6 +116,7 @@ public class Game : MonoBehaviour
 
 		timeText.text =
 		TimeSpan.FromSeconds(timeAlive).ToString(@"m\:ss") + " / " + TimeSpan.FromSeconds(gameSave.currentTime).ToString(@"m\:ss");
+		completionText.text = $"{gameSave.npcsHelped} / {npcsToHelp}";
 	}
 
 	public void UpdateHUD()
@@ -123,6 +126,14 @@ public class Game : MonoBehaviour
 
 		foreach (var item in Player.current.inv)
 			Instantiate(pfInvSlot, invContainer).transform.GetChild(0).GetComponent<Image>().sprite = item.sprite;
+	}
+
+	public void HelpedNPC()
+	{
+		gameSave.npcsHelped++;
+
+		if (npcsToHelp >= gameSave.npcsHelped)
+			Debug.Log("YOU HELPED ALL THE NPCs!!!");
 	}
 
 	public void DisplayTextBox(string title, string text)

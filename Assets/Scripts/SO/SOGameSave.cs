@@ -5,5 +5,6 @@ using UnityEngine;
 public class SOGameSave : ScriptableObject
 {
 	public List<SOItem> gemsLeft = new List<SOItem>();
-	public float currentTime;
+	[HideInInspector] public float currentTime;
+	[HideInInspector] public int npcsHelped;
 }

@@ -1,9 +1,18 @@
+using System.Linq;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 [AddComponentMenu("Game/Components/FetchQuest")]
 public class FetchQuest : MonoBehaviour
 {
+	[System.Serializable]
+	public struct Key
+	{
+		public NPCState state;
+		public Sprite sprite;
+	}
+
 	public enum NPCState
 	{
 		HasNotStarted,
@@ -11,16 +20,25 @@ public class FetchQuest : MonoBehaviour
 		Done
 	}
 
+	public bool countTowardsCompletion = true;
 	public SOItem requestedItem;
 	[Space]
-	[NaughtyAttributes.ResizableTextArea] public string startText;
-	[NaughtyAttributes.ResizableTextArea] public string duringText;
-	[NaughtyAttributes.ResizableTextArea] public string givenText;
-	[NaughtyAttributes.ResizableTextArea] public string endText;
+	[TextArea] public string startText;
+	[TextArea] public string duringText;
+	[TextArea] public string givenText;
+	[TextArea] public string endText;
 	[Space]
 	public UnityEvent onComplete;
+	[Space]
+	[SerializeField] SpriteRenderer status;
+	[SerializeField] List<Key> sprites = new List<Key>();
 
 	NPCState state = NPCState.HasNotStarted;
+
+	void OnEnable()
+	{
+		Game.current.npcsToHelp++;
+	}
 
 	public void Interact()
 	{
@@ -38,6 +56,7 @@ public class FetchQuest : MonoBehaviour
 			case NPCState.Started:
 				if (Player.current.UseItem(requestedItem))
 				{
+					if (countTowardsCompletion) Game.current.HelpedNPC();
 					Game.current.DisplayTextBox(name, givenText);
 					onComplete.Invoke();
 					state = NPCState.Done;
@@ -49,5 +68,7 @@ public class FetchQuest : MonoBehaviour
 				Game.current.DisplayTextBox(name, endText);
 				break;
 		}
+
+		status.sprite = sprites.Find((x) => x.state == state).sprite;
 	}
 }

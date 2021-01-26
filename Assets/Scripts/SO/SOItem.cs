@@ -4,5 +4,5 @@ using UnityEngine;
 public class SOItem : ScriptableObject
 {
 	[NaughtyAttributes.ShowAssetPreview(64, 64)] public Sprite sprite;
-	[NaughtyAttributes.ResizableTextArea] public string description;
+	[TextArea] public string description;
 }
