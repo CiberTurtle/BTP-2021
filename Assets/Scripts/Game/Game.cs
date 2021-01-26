@@ -132,7 +132,7 @@ public class Game : MonoBehaviour
 	{
 		gameSave.npcsHelped++;
 
-		if (npcsToHelp >= gameSave.npcsHelped)
+		if (gameSave.npcsHelped >= npcsToHelp)
 			Debug.Log("YOU HELPED ALL THE NPCs!!!");
 	}
 
