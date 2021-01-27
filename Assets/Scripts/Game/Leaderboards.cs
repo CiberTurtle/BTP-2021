@@ -64,9 +64,9 @@ public class Leaderboards : MonoBehaviour
 
 	IEnumerator DownloadHighscores()
 	{
-		using (var any = UnityWebRequest.Get(Codes.webUrl + Codes.anyPublicCode + "/pipe/"))
+		using (var any = UnityWebRequest.Get(Codes.webUrl + Codes.anyPublicCode + "/pipe-score-asc/"))
 		{
-			using (var all = UnityWebRequest.Get(Codes.webUrl + Codes.allPublicCode + "/pipe/"))
+			using (var all = UnityWebRequest.Get(Codes.webUrl + Codes.allPublicCode + "/pipe-score-asc/"))
 			{
 
 				yield return any.SendWebRequest();
