@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460b9c76dad5b94479248627ca158eaf, type: 3}
   m_Name: Stone
   m_EditorClassIdentifier: 
-  sprite: {fileID: 5299400320964040512, guid: bb9a5df8e8310b1478d106fa5b45bcd7, type: 3}
+  sprite: {fileID: 21300000, guid: c4342ca6387c5474aaad9543a804f255, type: 3}
   description: A piece of stone. Would make nice furniture.
