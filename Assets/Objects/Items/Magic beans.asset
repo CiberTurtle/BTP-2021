@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Magic beans
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: a7ab73c57c222c54eaf34ec8c68f85bc, type: 3}
-  description: Some beans that do same magic.
+  description: Some beans that do some magic.
