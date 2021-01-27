@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -26,8 +27,10 @@ public class Menu : MonoBehaviour
 				var entry = Instantiate(pfEntry, anyLeaderboard).transform;
 
 				entry.GetChild(0).GetComponent<TMP_Text>().text = Leaderboards.current.anyNames[i];
-				entry.GetChild(1).GetComponent<TMP_Text>().text = ((float)Leaderboards.current.anyScores[i] / 100).ToString();
+				entry.GetChild(1).GetComponent<TMP_Text>().text = TimeSpan.FromSeconds(((float)Leaderboards.current.anyScores[i] / 100)).ToString(@"m\:ss\.ff");
 			}
+
+			anyLeaderboard.GetComponent<RectTransform>().sizeDelta = new Vector2(anyLeaderboard.GetComponent<RectTransform>().sizeDelta.x, 64 * Leaderboards.current.anyNames.Count);
 
 			for (int i = 0; i < Leaderboards.current.allNames.Count; i++)
 			{
@@ -36,11 +39,14 @@ public class Menu : MonoBehaviour
 				entry.GetChild(0).GetComponent<TMP_Text>().text = Leaderboards.current.allNames[i];
 				entry.GetChild(1).GetComponent<TMP_Text>().text = ((float)Leaderboards.current.allScores[i] / 100).ToString();
 			}
+
+			allLeaderboard.GetComponent<RectTransform>().sizeDelta = new Vector2(allLeaderboard.GetComponent<RectTransform>().sizeDelta.x, 64 * Leaderboards.current.allNames.Count);
 		});
 
 		nameField.text = PlayerPrefs.GetString("name", "anonymous");
 
-		stages.GetChild(Random.Range(0, stages.childCount - 1)).gameObject.SetActive(true);
+		// var rng = new Random(DateTime.Today.Second);
+		stages.GetChild(new System.Random(DateTime.Today.Second).Next(0, stages.childCount)).gameObject.SetActive(true);
 
 		menu.SetActive(true);
 	}

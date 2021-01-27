@@ -29,7 +29,7 @@ public class Leaderboards : MonoBehaviour
 
 	public void AddNewHighscore(string username, int score, bool isAll)
 	{
-		StartCoroutine(UploadNewHighscore(username, score, isAll));
+		StartCoroutine(UploadNewHighscore(username, Mathf.Clamp(score, 0, int.MaxValue), isAll));
 	}
 
 	[NaughtyAttributes.Button]
@@ -68,7 +68,6 @@ public class Leaderboards : MonoBehaviour
 		{
 			using (var all = UnityWebRequest.Get(Codes.webUrl + Codes.allPublicCode + "/pipe-score-asc/"))
 			{
-
 				yield return any.SendWebRequest();
 				yield return all.SendWebRequest();
 
