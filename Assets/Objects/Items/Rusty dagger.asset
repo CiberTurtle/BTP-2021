@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 460b9c76dad5b94479248627ca158eaf, type: 3}
-  m_Name: Rusty dagger
+  m_Name: Rusty Dagger
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: d1787ee253575a041a1f925d6bb9cc2e, type: 3}
   description: A dagger in bad condition.

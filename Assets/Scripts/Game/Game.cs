@@ -43,6 +43,12 @@ public class Game : MonoBehaviour
 	[HideInInspector] public int npcsToHelp;
 	bool unlimitedTime = false;
 
+	DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> textboxPopAnim;
+	DG.Tweening.Core.TweenerCore<float, float, DG.Tweening.Plugins.Options.FloatOptions> textboxFadeAnim;
+
+	DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> itemboxPopAnim;
+	DG.Tweening.Core.TweenerCore<float, float, DG.Tweening.Plugins.Options.FloatOptions> itemboxFadeAnim;
+
 	Inputs inputs;
 
 	void Awake()
@@ -120,7 +126,7 @@ public class Game : MonoBehaviour
 		{
 			var box = Instantiate(pfInvSlot, invContainer).transform.GetChild(0).GetComponent<Image>();
 			box.sprite = item.sprite;
-			box.DOColor(Color.white, index * 0.05f);
+			box.DOColor(Color.white, (index + 1) * 0.25f);
 
 			index++;
 		}
@@ -141,11 +147,16 @@ public class Game : MonoBehaviour
 
 	public void DisplayTextBox(string title, string text, float time = 0f)
 	{
+		if (textboxPopAnim != null)
+		{
+			textboxPopAnim.Kill();
+			textboxFadeAnim.Kill();
+		}
 		textbox.alpha = 0;
-		textbox.transform.localScale = new Vector3(1.25f, 1.25f, 1f);
-		textbox.transform.DOScale(Vector3.one, 0.1f);
-		textbox.DOFade(1f, 0.1f)
-		.OnComplete(() => textbox.DOFade(0, 1f).SetDelay(time));
+		textbox.transform.localScale = new Vector3(1.1f, 1.1f, 1f);
+		textboxPopAnim = textbox.transform.DOScale(Vector3.one, 0.1f);
+		textboxFadeAnim = textbox.DOFade(1f, 0.1f)
+		.OnComplete(() => textboxFadeAnim = textbox.DOFade(0, 1f).SetDelay(time));
 
 		textBoxTitle.text = title;
 		textBoxText.text = text;
@@ -153,11 +164,16 @@ public class Game : MonoBehaviour
 
 	public void DisplayItemBox(SOItem item)
 	{
+		if (itemboxPopAnim != null)
+		{
+			itemboxPopAnim.Kill();
+			itemboxFadeAnim.Kill();
+		}
 		itemBox.alpha = 0;
-		itemBox.transform.localScale = new Vector3(1.25f, 1.25f, 1f);
-		itemBox.transform.DOScale(Vector3.one, 0.1f);
-		itemBox.DOFade(1f, 0.1f)
-		.OnComplete(() => itemBox.DOFade(0, 1f).SetDelay(Mathf.Clamp(item.name.Length * 0.15f + item.description.Length * 0.05f, 3, 10)));
+		itemBox.transform.localScale = new Vector3(1.1f, 1.1f, 1f);
+		itemboxPopAnim = itemBox.transform.DOScale(Vector3.one, 0.1f);
+		itemboxFadeAnim = itemBox.DOFade(1f, 0.1f)
+		.OnComplete(() => itemboxFadeAnim = itemBox.DOFade(0, 1f).SetDelay(Mathf.Clamp(item.name.Length * 0.15f + item.description.Length * 0.05f, 3, 10)));
 
 		itemBoxTitle.text = $"You Picked Up: {item.name}!";
 		itemBoxText.text = item.description;

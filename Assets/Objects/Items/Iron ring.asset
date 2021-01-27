@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 460b9c76dad5b94479248627ca158eaf, type: 3}
-  m_Name: Iron ring
+  m_Name: Iron Ring
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: cb7129ee8bd7b054f8ac91bb9539ff1c, type: 3}
   description: A metal circle you put on a finger.
