@@ -3,17 +3,19 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
+	[SerializeField] List<SOItem> gems;
+
 	public void PlaceGem()
 	{
-		if (Game.gameSave.gemsLeft.Count < 1)
+		if (gems.Count < 1)
 			Game.current.End();
 
-		foreach (var gem in Game.gameSave.gemsLeft)
+		foreach (var gem in gems)
 		{
 			if (Player.current.UseItem(gem))
 			{
-				Game.gameSave.gemsLeft.Remove(gem);
-				if (Game.gameSave.gemsLeft.Count < 1)
+				gems.Remove(gem);
+				if (gems.Count < 1)
 					GotAllGems();
 			}
 		}

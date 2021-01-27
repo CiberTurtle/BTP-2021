@@ -29,18 +29,18 @@ public class Game : MonoBehaviour
 	[Space]
 	[SerializeField] TMP_Text timeText;
 	[SerializeField] TMP_Text completionText;
+	[SerializeField] Color completedColor;
 	[Space]
 	[SerializeField] GameObject pauseMenu;
 	[Space]
-	public SOGameSave resetGameSave;
 	[SerializeField] UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera cam;
 	[Space]
 	[NaughtyAttributes.ReadOnly] public bool PAUSED = false;
 	[NaughtyAttributes.ReadOnly] public float timeLeft;
 	[NaughtyAttributes.ReadOnly] public float timeAlive;
 
-	[HideInInspector] public static SOGameSave gameSave = null;
 	[HideInInspector] public int npcsToHelp;
+	[HideInInspector] public int npcsHelped;
 	bool unlimitedTime = false;
 
 	DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> textboxPopAnim;
@@ -64,8 +64,6 @@ public class Game : MonoBehaviour
 
 			DisplayTextBox("[ Game ]", unlimitedTime ? "Toggled Unlimited Time <color=green>On</color>" : "Toggled Unlimited Time <color=red>Off</color>", 1.5f);
 		};
-
-		if (gameSave == null) gameSave = Instantiate(resetGameSave);
 #endif
 
 		timeLeft = timeToLive;
@@ -97,7 +95,7 @@ public class Game : MonoBehaviour
 		timeAlive += Time.deltaTime;
 
 		if (timeLeft < 0)
-			Respawn();
+			Restart();
 
 		if (!unlimitedTime)
 			timeLeft -= Time.deltaTime;
@@ -112,8 +110,16 @@ public class Game : MonoBehaviour
 		timeLeftBar.color = color;
 
 		timeText.text =
-		TimeSpan.FromSeconds(timeAlive).ToString(@"m\:ss") + " / " + TimeSpan.FromSeconds(gameSave.currentTime).ToString(@"m\:ss");
-		completionText.text = $"{gameSave.npcsHelped} / {npcsToHelp}";
+		TimeSpan.FromSeconds(timeAlive).ToString(@"m\:ss");
+		completionText.text = $"{npcsHelped} / {npcsToHelp}";
+	}
+
+	public void HelpedNPC()
+	{
+		npcsHelped++;
+
+		if (npcsHelped >= npcsToHelp)
+			completionText.color = completedColor;
 	}
 
 	public void UpdateHUD()
@@ -126,18 +132,10 @@ public class Game : MonoBehaviour
 		{
 			var box = Instantiate(pfInvSlot, invContainer).transform.GetChild(0).GetComponent<Image>();
 			box.sprite = item.sprite;
-			box.DOColor(Color.white, (index + 1) * 0.25f);
+			box.DOColor(Color.white, (index + 1) * 0.1f).SetEase(Ease.OutExpo);
 
 			index++;
 		}
-	}
-
-	public void HelpedNPC()
-	{
-		gameSave.npcsHelped++;
-
-		if (gameSave.npcsHelped >= npcsToHelp)
-			Debug.Log("YOU HELPED ALL THE NPCs!!!");
 	}
 
 	public void DisplayTextBox(string title, string text)
@@ -192,27 +190,29 @@ public class Game : MonoBehaviour
 		PAUSED = false;
 	}
 
-	public void Respawn()
-	{
-		gameSave.currentTime += timeAlive;
-
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-	}
-
 	public void Restart()
 	{
-		gameSave = Instantiate(resetGameSave);
-
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
 	public void Exit()
 	{
-		Application.Quit();
+		SceneManager.LoadScene(0);
 	}
 
 	public void End()
 	{
-		Debug.Log("YOU BEAT THE GAME!!! pog");
+		switch (PlayerPrefs.GetInt("mode", 0))
+		{
+			case 0:
+				Debug.Log("YOU BEAT THE GAME!!! pog");
+				break;
+			case 1:
+				Leaderboards.current.AddNewHighscore(PlayerPrefs.GetString("name", "anonymous"), (int)timeAlive * 100, false);
+				break;
+			case 2:
+				Leaderboards.current.AddNewHighscore(PlayerPrefs.GetString("name", "anonymous"), (int)timeAlive * 100, true);
+				break;
+		}
 	}
 }
