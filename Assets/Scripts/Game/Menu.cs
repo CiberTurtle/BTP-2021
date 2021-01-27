@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using TMPro;
 
 public class Menu : MonoBehaviour
@@ -13,10 +14,14 @@ public class Menu : MonoBehaviour
 	[SerializeField] GameObject pfEntry;
 	[SerializeField] Transform anyLeaderboard;
 	[SerializeField] Transform allLeaderboard;
+	[SerializeField] Button refreshLeaderboardButton;
+	[SerializeField] float timeBtwLeaderboardRefresh;
 	[Space]
 	[SerializeField] TMP_InputField nameField;
 	[Space]
 	[SerializeField] Transform stages;
+
+	float leaderboardRefreshCooldown;
 
 	private void Awake()
 	{
@@ -45,10 +50,15 @@ public class Menu : MonoBehaviour
 
 		nameField.text = PlayerPrefs.GetString("name", "anonymous");
 
-		// var rng = new Random(DateTime.Today.Second);
-		stages.GetChild(new System.Random(DateTime.Today.Second).Next(0, stages.childCount)).gameObject.SetActive(true);
+		stages.GetChild(new System.Random().Next(0, stages.childCount)).gameObject.SetActive(true);
 
 		menu.SetActive(true);
+	}
+
+	void Update()
+	{
+		leaderboardRefreshCooldown -= Time.deltaTime;
+		refreshLeaderboardButton.interactable = leaderboardRefreshCooldown < 0;
 	}
 
 	public void StartGame()
@@ -59,19 +69,16 @@ public class Menu : MonoBehaviour
 	public void PrepNormal()
 	{
 		PlayerPrefs.SetInt("mode", 0);
-		Debug.Log("Normal");
 	}
 
 	public void PrepAny()
 	{
 		PlayerPrefs.SetInt("mode", 1);
-		Debug.Log("Any%");
 	}
 
 	public void PrepAll()
 	{
 		PlayerPrefs.SetInt("mode", 2);
-		Debug.Log("100%");
 	}
 
 	public void OpenStart(bool open)
@@ -103,6 +110,9 @@ public class Menu : MonoBehaviour
 
 	public void RefreshLeaderboards()
 	{
+		if (leaderboardRefreshCooldown > 0) return;
+		leaderboardRefreshCooldown = timeBtwLeaderboardRefresh;
+
 		foreach (Transform child in anyLeaderboard)
 			Destroy(child.gameObject);
 		foreach (Transform child in allLeaderboard)

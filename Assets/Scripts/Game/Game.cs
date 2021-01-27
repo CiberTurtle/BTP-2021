@@ -152,8 +152,8 @@ public class Game : MonoBehaviour
 		}
 		textbox.alpha = 0;
 		textbox.transform.localScale = new Vector3(1.1f, 1.1f, 1f);
-		textboxPopAnim = textbox.transform.DOScale(Vector3.one, 0.1f);
-		textboxFadeAnim = textbox.DOFade(1f, 0.1f)
+		textboxPopAnim = textbox.transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
+		textboxFadeAnim = textbox.DOFade(1f, 0.2f)
 		.OnComplete(() => textboxFadeAnim = textbox.DOFade(0, 1f).SetDelay(time));
 
 		textBoxTitle.text = title;
@@ -169,8 +169,8 @@ public class Game : MonoBehaviour
 		}
 		itemBox.alpha = 0;
 		itemBox.transform.localScale = new Vector3(1.1f, 1.1f, 1f);
-		itemboxPopAnim = itemBox.transform.DOScale(Vector3.one, 0.1f);
-		itemboxFadeAnim = itemBox.DOFade(1f, 0.1f)
+		itemboxPopAnim = itemBox.transform.DOScale(Vector3.one, 0.2f).SetEase(Ease.OutBack);
+		itemboxFadeAnim = itemBox.DOFade(1f, 0.2f)
 		.OnComplete(() => itemboxFadeAnim = itemBox.DOFade(0, 1f).SetDelay(Mathf.Clamp(item.name.Length * 0.15f + item.description.Length * 0.05f, 3, 10)));
 
 		itemBoxTitle.text = $"You Picked Up: {item.name}!";
@@ -211,7 +211,10 @@ public class Game : MonoBehaviour
 				Leaderboards.current.AddNewHighscore(PlayerPrefs.GetString("name", "anonymous"), (int)timeAlive * 100, false);
 				break;
 			case 2:
-				Leaderboards.current.AddNewHighscore(PlayerPrefs.GetString("name", "anonymous"), (int)timeAlive * 100, true);
+				if (npcsHelped >= npcsToHelp)
+					Leaderboards.current.AddNewHighscore(PlayerPrefs.GetString("name", "anonymous"), (int)timeAlive * 100, true);
+				else
+					Leaderboards.current.AddNewHighscore(PlayerPrefs.GetString("name", "anonymous"), (int)timeAlive * 100, false);
 				break;
 		}
 	}

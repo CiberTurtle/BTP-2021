@@ -42719,6 +42719,8 @@ MonoBehaviour:
   pfEntry: {fileID: 1274596929671413909, guid: 067ee834b1c9d1b46b16c5a35429ed6d, type: 3}
   anyLeaderboard: {fileID: 1954680654}
   allLeaderboard: {fileID: 2018322657}
+  refreshLeaderboardButton: {fileID: 2050309541}
+  timeBtwLeaderboardRefresh: 10
   nameField: {fileID: 16152632}
   stages: {fileID: 368183116}
 --- !u!4 &1887149099
@@ -43357,6 +43359,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2050309541 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3969090929204000163, guid: 040f73dd4ac332941b7bb2c53e982053, type: 3}
+  m_PrefabInstance: {fileID: 2071935239}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2071935239
 PrefabInstance:
   m_ObjectHideFlags: 0

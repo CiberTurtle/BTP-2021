@@ -21,6 +21,7 @@ public class Leaderboards : MonoBehaviour
 		if (current != null)
 		{
 			Destroy(this.gameObject);
+			return;
 		}
 
 		current = this;
