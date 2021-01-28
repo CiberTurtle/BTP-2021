@@ -35,4 +35,5 @@ public class Common : MonoBehaviour
 	public void AddTime(float amount) => Game.current.AddTime(amount);
 	public void DestroyObj(Object obj) => Destroy(obj);
 	public void MoveTo(Transform position) => transform.DOMove(position.position, position.localScale.x).SetEase((Ease)(int)position.localScale.y).SetLoops((int)position.eulerAngles.z, (LoopType)(int)position.localScale.z);
+	public void PlaySound(AudioClip clip) => Game.current.PlaySound(clip);
 }

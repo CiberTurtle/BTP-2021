@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using TMPro;
 using DG.Tweening;
@@ -67,6 +68,12 @@ public class Game : MonoBehaviour
 #endif
 
 		timeLeft = timeToLive;
+
+		if (PlayerPrefs.GetInt("mode", 0) == 0)
+		{
+			timeText.gameObject.SetActive(false);
+			completionText.gameObject.SetActive(false);
+		}
 	}
 
 	void OnEnable() => inputs.Enable();
@@ -112,6 +119,16 @@ public class Game : MonoBehaviour
 		timeText.text =
 		TimeSpan.FromSeconds(timeAlive).ToString(@"m\:ss");
 		completionText.text = $"{npcsHelped} / {npcsToHelp}";
+	}
+
+	public void PlaySound(AudioClip clip)
+	{
+		var source = transform.GetChild(0).gameObject.AddComponent<AudioSource>();
+
+		source.clip = clip;
+		source.Play();
+
+		Destroy(source, clip.length);
 	}
 
 	public void HelpedNPC()
