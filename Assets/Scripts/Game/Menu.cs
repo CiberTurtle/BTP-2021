@@ -42,7 +42,7 @@ public class Menu : MonoBehaviour
 				var entry = Instantiate(pfEntry, allLeaderboard).transform;
 
 				entry.GetChild(0).GetComponent<TMP_Text>().text = Leaderboards.current.allNames[i];
-				entry.GetChild(1).GetComponent<TMP_Text>().text = ((float)Leaderboards.current.allScores[i] / 100).ToString();
+				entry.GetChild(1).GetComponent<TMP_Text>().text = TimeSpan.FromSeconds(((float)Leaderboards.current.allScores[i] / 100)).ToString(@"m\:ss\.ff");
 			}
 
 			allLeaderboard.GetComponent<RectTransform>().sizeDelta = new Vector2(allLeaderboard.GetComponent<RectTransform>().sizeDelta.x, 64 * Leaderboards.current.allNames.Count);

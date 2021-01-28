@@ -247,8 +247,8 @@ SpriteRenderer:
   m_SortingLayerID: 1598615625
   m_SortingLayer: -2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
-  m_Color: {r: 0, g: 0.6666665, b: 1, a: 1}
+  m_Sprite: {fileID: -2311659948842064771, guid: 2be1ca62377a05148aba48792cf1d24c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -272,6 +272,7 @@ GameObject:
   - component: {fileID: 2665524342415580799}
   - component: {fileID: 2665524342415580796}
   - component: {fileID: 2665524342415580792}
+  - component: {fileID: 3599697646392324676}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -314,6 +315,7 @@ MonoBehaviour:
   pfInteractEffect: {fileID: 4653046322072974338, guid: e34dfddd71377be46aaddb6e23a3047d, type: 3}
   interatableUI: {fileID: 2665524341491395710}
   interactableText: {fileID: 1186869198867311754}
+  art: {fileID: 2665524342513250087}
   inv: []
 --- !u!114 &2665524342415580798
 MonoBehaviour:
@@ -420,8 +422,27 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.6, y: 0.9}
   m_EdgeRadius: 0
+--- !u!95 &3599697646392324676
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2665524342415580794}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 74f3f0862cc24784eb408ee97917be85, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2665524342513250080
 GameObject:
   m_ObjectHideFlags: 0

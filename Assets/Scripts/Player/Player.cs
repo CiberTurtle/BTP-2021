@@ -17,13 +17,18 @@ public class Player : MonoBehaviour
 	[SerializeField] GameObject pfInteractEffect;
 	[SerializeField] Transform interatableUI;
 	[SerializeField] TMP_Text interactableText;
+	[Space]
+	[SerializeField] Transform art;
 
 	// Data
 	[Space]
 	public List<SOItem> inv = new List<SOItem>();
 	Interactable interactableObj;
+	float baseSizeX = 1;
+	Vector3 targetSquish;
 
 	// Cache
+	Animator animator;
 	Mover2D mover;
 	Inputs inputs;
 
@@ -32,6 +37,7 @@ public class Player : MonoBehaviour
 		current = this;
 
 		mover = GetComponent<Mover2D>();
+		animator = GetComponent<Animator>();
 
 		inputs = new Inputs();
 		inputs.Player.Move.performed += (x) => mover.v2MoveInput.x = x.ReadValue<float>();
@@ -48,6 +54,14 @@ public class Player : MonoBehaviour
 	void Update()
 	{
 		if (Game.current.PAUSED) return;
+
+		animator.SetFloat("X", Mathf.Abs(mover.v2Velocity.x));
+		animator.SetFloat("Y", mover.v2Velocity.y);
+
+		if (Mathf.Abs(mover.v2Velocity.x) > 0.1f) baseSizeX = mover.v2Velocity.x > 0f ? 1f : -1f;
+		targetSquish = new Vector3(baseSizeX * Mathf.Clamp(1 - Mathf.Abs(mover.v2Velocity.y * 0.025f), 0.5f, 1f), 1, 1);
+
+		art.localScale = Vector3.Lerp(art.localScale, targetSquish, Time.deltaTime * 2f * 10f);
 
 		Collider2D closestItem = null;
 		var closestDist = float.PositiveInfinity;
