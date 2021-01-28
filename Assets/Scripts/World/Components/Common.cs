@@ -19,7 +19,17 @@ public class Common : MonoBehaviour
 	[NaughtyAttributes.ReadOnly]
 	public bool ignoreMePls;
 
+	bool gaveItem;
+
 	public void GiveItem(SOItem item) => Player.current.AddItem(item);
+	public void GiveItemOnce(SOItem item)
+	{
+		if (!gaveItem)
+		{
+			gaveItem = true;
+			Player.current.AddItem(item);
+		}
+	}
 	public bool UseItem(SOItem item) => Player.current.UseItem(item);
 	public void Say(string text) => Game.current.DisplayTextBox(name, text, 10f);
 	public void AddTime(float amount) => Game.current.AddTime(amount);
