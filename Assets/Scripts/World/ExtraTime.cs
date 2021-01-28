@@ -40,7 +40,7 @@ public class ExtraTime : MonoBehaviour
 		spr.enabled = false;
 		col.enabled = false;
 
-		if (respawnTime < 0) StartCoroutine(IRespawnTimmer());
+		if (respawnTime > 0) StartCoroutine(IRespawnTimmer());
 	}
 
 	IEnumerator IRespawnTimmer()
