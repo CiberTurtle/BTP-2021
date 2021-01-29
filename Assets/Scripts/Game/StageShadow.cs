@@ -10,6 +10,8 @@ public class StageShadow : MonoBehaviour
 
 	void Awake()
 	{
+		if (PlayerPrefs.GetInt("shadow", 1) == 0) return;
+
 		var tilemap = Instantiate(baseTilemap, baseTilemap.transform.parent).transform;
 
 		Destroy(tilemap.GetComponent<TilemapCollider2D>());

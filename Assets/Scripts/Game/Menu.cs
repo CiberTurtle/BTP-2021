@@ -17,6 +17,9 @@ public class Menu : MonoBehaviour
 	[SerializeField] Button refreshLeaderboardButton;
 	[SerializeField] float timeBtwLeaderboardRefresh;
 	[Space]
+	[SerializeField] TMP_Text shadowText;
+	[SerializeField] TMP_Text musicText;
+	[Space]
 	[SerializeField] TMP_InputField nameField;
 	[Space]
 	[SerializeField] Transform stages;
@@ -53,6 +56,12 @@ public class Menu : MonoBehaviour
 		stages.GetChild(new System.Random().Next(0, stages.childCount)).gameObject.SetActive(true);
 
 		menu.SetActive(true);
+
+		ToggleShadow();
+		ToggleShadow();
+
+		ToggleMusic();
+		ToggleMusic();
 	}
 
 	void Update()
@@ -119,6 +128,18 @@ public class Menu : MonoBehaviour
 			Destroy(child.gameObject);
 
 		Leaderboards.current.GetLeaderboards();
+	}
+
+	public void ToggleShadow()
+	{
+		PlayerPrefs.SetInt("shadow", PlayerPrefs.GetInt("shadow", 1) == 1 ? 0 : 1);
+		shadowText.text = PlayerPrefs.GetInt("shadow", 1) == 1 ? "Shadows: On" : "Shadows: Off";
+	}
+
+	public void ToggleMusic()
+	{
+		PlayerPrefs.SetInt("music", PlayerPrefs.GetInt("music", 1) == 1 ? 0 : 1);
+		musicText.text = PlayerPrefs.GetInt("music", 1) == 1 ? "Music: On" : "Music: Off";
 	}
 
 	public void OpenURL(string url)

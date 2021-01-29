@@ -120,6 +120,14 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ScreenShot"",
+                    ""type"": ""Button"",
+                    ""id"": ""c16de197-a541-4040-b1bd-24cc1bdc2435"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -142,6 +150,17 @@ public class @Inputs : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8253f034-6daf-4576-9d64-0ec7af6d1576"",
+                    ""path"": ""<Keyboard>/f3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ScreenShot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -176,6 +195,7 @@ public class @Inputs : IInputActionCollection, IDisposable
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
         m_Game_UnlimitedTime = m_Game.FindAction("UnlimitedTime", throwIfNotFound: true);
         m_Game_Pause = m_Game.FindAction("Pause", throwIfNotFound: true);
+        m_Game_ScreenShot = m_Game.FindAction("ScreenShot", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -276,12 +296,14 @@ public class @Inputs : IInputActionCollection, IDisposable
     private IGameActions m_GameActionsCallbackInterface;
     private readonly InputAction m_Game_UnlimitedTime;
     private readonly InputAction m_Game_Pause;
+    private readonly InputAction m_Game_ScreenShot;
     public struct GameActions
     {
         private @Inputs m_Wrapper;
         public GameActions(@Inputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @UnlimitedTime => m_Wrapper.m_Game_UnlimitedTime;
         public InputAction @Pause => m_Wrapper.m_Game_Pause;
+        public InputAction @ScreenShot => m_Wrapper.m_Game_ScreenShot;
         public InputActionMap Get() { return m_Wrapper.m_Game; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -297,6 +319,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @Pause.started -= m_Wrapper.m_GameActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnPause;
+                @ScreenShot.started -= m_Wrapper.m_GameActionsCallbackInterface.OnScreenShot;
+                @ScreenShot.performed -= m_Wrapper.m_GameActionsCallbackInterface.OnScreenShot;
+                @ScreenShot.canceled -= m_Wrapper.m_GameActionsCallbackInterface.OnScreenShot;
             }
             m_Wrapper.m_GameActionsCallbackInterface = instance;
             if (instance != null)
@@ -307,6 +332,9 @@ public class @Inputs : IInputActionCollection, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @ScreenShot.started += instance.OnScreenShot;
+                @ScreenShot.performed += instance.OnScreenShot;
+                @ScreenShot.canceled += instance.OnScreenShot;
             }
         }
     }
@@ -330,5 +358,6 @@ public class @Inputs : IInputActionCollection, IDisposable
     {
         void OnUnlimitedTime(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnScreenShot(InputAction.CallbackContext context);
     }
 }

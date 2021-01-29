@@ -107,6 +107,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ScreenShot",
+                    "type": "Button",
+                    "id": "c16de197-a541-4040-b1bd-24cc1bdc2435",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -129,6 +137,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8253f034-6daf-4576-9d64-0ec7af6d1576",
+                    "path": "<Keyboard>/f3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "ScreenShot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

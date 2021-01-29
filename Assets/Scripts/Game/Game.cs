@@ -44,6 +44,8 @@ public class Game : MonoBehaviour
 	[SerializeField] SpriteRenderer bgBase;
 	[SerializeField] SpriteRenderer bgOverlay;
 	[Space]
+	[SerializeField] AudioSource music;
+	[Space]
 	[SerializeField] UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera cam;
 	[Space]
 	[NaughtyAttributes.ReadOnly] public bool PAUSED = false;
@@ -74,6 +76,10 @@ public class Game : MonoBehaviour
 		inputs = new Inputs();
 		inputs.Game.Pause.performed += (x) => PAUSED = !PAUSED;
 #if UNITY_EDITOR
+		inputs.Game.ScreenShot.performed += (x) =>
+		{
+			ScreenCapture.CaptureScreenshot(Application.dataPath + "/Screen Shots/" + DateTime.Now.ToString("yyyy-mm-dd hh.mm.ss") + ".screenshot.png");
+		};
 		inputs.Game.UnlimitedTime.performed += (x) =>
 		{
 			unlimitedTime = !unlimitedTime;
@@ -87,9 +93,11 @@ public class Game : MonoBehaviour
 		if (PlayerPrefs.GetInt("mode", 0) == 0)
 		{
 			timeText.gameObject.SetActive(false);
-			if (PlayerPrefs.GetInt("mode", 0) == 2)
+			if (PlayerPrefs.GetInt("mode", 0) == 1)
 				completionText.gameObject.SetActive(false);
 		}
+
+		music.enabled = PlayerPrefs.GetInt("music", 1) == 1;
 	}
 
 	void OnEnable() => inputs.Enable();
@@ -235,7 +243,7 @@ public class Game : MonoBehaviour
 		bgOverlay.color = new Color(1, 1, 1, 0);
 		bgAnimOverlay = bgOverlay.DOColor(Color.white, 1f).SetEase(Ease.Linear).OnComplete(() =>
 		{
-			bgBase.sprite = bg;
+			bgBase.sprite = bgOverlay.sprite;
 			bgBase.color = Color.white;
 			bgOverlay.color = new Color(1, 1, 1, 0);
 			isBGTransitioning = false;
@@ -270,7 +278,11 @@ public class Game : MonoBehaviour
 
 		beatGameMenu.transform.DOScale(Vector3.one, 2f).SetDelay(0.5f).SetEase(Ease.InOutCirc).SetUpdate(true);
 		beatGameMenu.DOFade(1f, 2f).SetDelay(0.5f).SetEase(Ease.InOutCirc).SetUpdate(true)
-		.OnComplete(() => beatGameMenu.interactable = true);
+		.OnComplete(() =>
+		{
+			beatGameMenu.interactable = true;
+			beatGameMenu.blocksRaycasts = true;
+		});
 
 		timeBeatText.text =
 		TimeSpan.FromSeconds(timeAlive).ToString(@"m\:ss");
