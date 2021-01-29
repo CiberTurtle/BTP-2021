@@ -53,6 +53,11 @@ public class Player : MonoBehaviour
 
 	void Update()
 	{
+		if (Game.current.hasWon)
+		{
+			interatableUI.gameObject.SetActive(false);
+			return;
+		}
 		if (Game.current.PAUSED) return;
 
 		animator.SetFloat("X", Mathf.Abs(mover.v2Velocity.x));

@@ -61,6 +61,14 @@ public class Mover2D : MonoBehaviour
 		fMinJumpVelocity = Mathf.Sqrt(2 * Mathf.Abs(fGravity) * fMinJumpHeight);
 	}
 
+	void Update()
+	{
+		if (sendOnJump) onJump.Invoke();
+		else if (sendOnLand) onLand.Invoke();
+		sendOnJump = false;
+		sendOnLand = false;
+	}
+
 	void FixedUpdate()
 	{
 		v2ActualInput = v2MoveInput;
@@ -133,11 +141,6 @@ public class Mover2D : MonoBehaviour
 		bJumpDown = false;
 
 		controller.Move(v2Velocity * Time.fixedDeltaTime, v2ActualInput);
-
-		if (sendOnJump) onJump.Invoke();
-		else if (sendOnLand) onLand.Invoke();
-		sendOnJump = false;
-		sendOnLand = false;
 
 		if (controller.collisions.above || controller.collisions.below)
 		{

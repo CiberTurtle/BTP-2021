@@ -19,6 +19,8 @@ public class Game : MonoBehaviour
 	[SerializeField] Transform invContainer;
 	[SerializeField] GameObject pfInvSlot;
 	[Space]
+	[SerializeField] GameObject minimap;
+	[Space]
 	[SerializeField] CanvasGroup textbox;
 	[SerializeField] TMP_Text textBoxTitle;
 	[SerializeField] TMP_Text textBoxText;
@@ -34,12 +36,18 @@ public class Game : MonoBehaviour
 	[Space]
 	[SerializeField] GameObject pauseMenu;
 	[Space]
+	[SerializeField] CanvasGroup beatGameMenu;
+	[SerializeField] TMP_Text timeBeatText;
+	[SerializeField] TMP_Text completionBeatText;
+	[SerializeField] TMP_Text tagBeatText;
+	[Space]
 	[SerializeField] UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera cam;
 	[Space]
 	[NaughtyAttributes.ReadOnly] public bool PAUSED = false;
 	[NaughtyAttributes.ReadOnly] public float timeLeft;
 	[NaughtyAttributes.ReadOnly] public float timeAlive;
 
+	[HideInInspector] public bool hasWon;
 	[HideInInspector] public int npcsToHelp;
 	[HideInInspector] public int npcsHelped;
 	bool unlimitedTime = false;
@@ -88,6 +96,8 @@ public class Game : MonoBehaviour
 
 	void Update()
 	{
+		if (hasWon) return;
+
 		if (PAUSED)
 		{
 			Time.timeScale = 0;
@@ -219,10 +229,23 @@ public class Game : MonoBehaviour
 
 	public void End()
 	{
+		if (hasWon) return;
+
+		beatGameMenu.transform.DOScale(Vector3.one, 2f).SetDelay(0.5f).SetEase(Ease.InOutCirc).SetUpdate(true);
+		beatGameMenu.DOFade(1f, 2f).SetDelay(0.5f).SetEase(Ease.InOutCirc).SetUpdate(true)
+		.OnComplete(() => beatGameMenu.interactable = true);
+
+		timeBeatText.text =
+		TimeSpan.FromSeconds(timeAlive).ToString(@"m\:ss");
+		completionBeatText.text = $"{npcsHelped} / {npcsToHelp}";
+
+		hasWon = true;
+		Time.timeScale = 0f;
+		minimap.SetActive(false);
+
 		switch (PlayerPrefs.GetInt("mode", 0))
 		{
 			case 0:
-				Debug.Log("YOU BEAT THE GAME!!! pog");
 				break;
 			case 1:
 				Leaderboards.current.AddNewHighscore(PlayerPrefs.GetString("name", "anonymous"), (int)timeAlive * 100, false);
