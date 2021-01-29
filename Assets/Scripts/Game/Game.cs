@@ -80,7 +80,8 @@ public class Game : MonoBehaviour
 		if (PlayerPrefs.GetInt("mode", 0) == 0)
 		{
 			timeText.gameObject.SetActive(false);
-			completionText.gameObject.SetActive(false);
+			if (PlayerPrefs.GetInt("mode", 0) == 2)
+				completionText.gameObject.SetActive(false);
 		}
 	}
 
@@ -242,6 +243,8 @@ public class Game : MonoBehaviour
 		hasWon = true;
 		Time.timeScale = 0f;
 		minimap.SetActive(false);
+		timeText.gameObject.SetActive(false);
+		completionText.gameObject.SetActive(false);
 
 		switch (PlayerPrefs.GetInt("mode", 0))
 		{
