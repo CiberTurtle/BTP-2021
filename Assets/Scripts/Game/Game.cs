@@ -41,7 +41,8 @@ public class Game : MonoBehaviour
 	[SerializeField] TMP_Text completionBeatText;
 	[SerializeField] TMP_Text tagBeatText;
 	[Space]
-	[SerializeField] SpriteRenderer background;
+	[SerializeField] SpriteRenderer bgBase;
+	[SerializeField] SpriteRenderer bgOverlay;
 	[Space]
 	[SerializeField] UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera cam;
 	[Space]
@@ -53,12 +54,16 @@ public class Game : MonoBehaviour
 	[HideInInspector] public int npcsToHelp;
 	[HideInInspector] public int npcsHelped;
 	bool unlimitedTime = false;
+	bool isBGTransitioning;
 
 	DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> textboxPopAnim;
 	DG.Tweening.Core.TweenerCore<float, float, DG.Tweening.Plugins.Options.FloatOptions> textboxFadeAnim;
 
 	DG.Tweening.Core.TweenerCore<Vector3, Vector3, DG.Tweening.Plugins.Options.VectorOptions> itemboxPopAnim;
 	DG.Tweening.Core.TweenerCore<float, float, DG.Tweening.Plugins.Options.FloatOptions> itemboxFadeAnim;
+
+	DG.Tweening.Core.TweenerCore<Color, Color, DG.Tweening.Plugins.Options.ColorOptions> bgAnimBase;
+	DG.Tweening.Core.TweenerCore<Color, Color, DG.Tweening.Plugins.Options.ColorOptions> bgAnimOverlay;
 
 	Inputs inputs;
 
@@ -210,7 +215,31 @@ public class Game : MonoBehaviour
 
 	public void ChangeBG(Sprite bg)
 	{
-		background.sprite = bg;
+		if (bgBase.sprite == bg || isBGTransitioning && bgOverlay.sprite == bg) return;
+
+		if (isBGTransitioning)
+		{
+			if (bgAnimBase != null) bgAnimBase.Kill();
+			if (bgAnimOverlay != null) bgAnimOverlay.Kill();
+
+			bgBase.sprite = bg;
+		}
+
+		isBGTransitioning = true;
+
+		bgOverlay.sprite = bg;
+
+		bgBase.color = Color.white;
+		bgBase.DOColor(new Color(1, 1, 1, 0), 1f).SetEase(Ease.Linear);
+
+		bgOverlay.color = new Color(1, 1, 1, 0);
+		bgAnimOverlay = bgOverlay.DOColor(Color.white, 1f).SetEase(Ease.Linear).OnComplete(() =>
+		{
+			bgBase.sprite = bg;
+			bgBase.color = Color.white;
+			bgOverlay.color = new Color(1, 1, 1, 0);
+			isBGTransitioning = false;
+		});
 	}
 
 	public void AddTime(float time)
