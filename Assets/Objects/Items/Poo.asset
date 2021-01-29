@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Poo
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: aa7bbcb218752184b90beeebf25d8ecc, type: 3}
-  description: We all make it. Discusting. Good fertalizer though.
+  description: We all make it. Disgusting. Good fertalizer though.

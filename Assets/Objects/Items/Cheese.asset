@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Cheese
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: af35693a21f226046a49091c06479164, type: 3}
-  description: Gourme foos the mice love.
+  description: Gourmet food the mice love.
