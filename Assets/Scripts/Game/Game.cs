@@ -41,6 +41,8 @@ public class Game : MonoBehaviour
 	[SerializeField] TMP_Text completionBeatText;
 	[SerializeField] TMP_Text tagBeatText;
 	[Space]
+	[SerializeField] SpriteRenderer background;
+	[Space]
 	[SerializeField] UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera cam;
 	[Space]
 	[NaughtyAttributes.ReadOnly] public bool PAUSED = false;
@@ -204,6 +206,11 @@ public class Game : MonoBehaviour
 		itemBoxTitle.text = $"You Picked Up: {item.name}!";
 		itemBoxText.text = item.description;
 		itemBoxIcon.sprite = item.sprite;
+	}
+
+	public void ChangeBG(Sprite bg)
+	{
+		background.sprite = bg;
 	}
 
 	public void AddTime(float time)

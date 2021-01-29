@@ -3,6 +3,8 @@ using UnityEngine.Events;
 
 public class CollisionTrigger : MonoBehaviour
 {
+	[SerializeField] bool onlyTriggerOnce = true;
+	[Space]
 	public UnityEvent onTriggerEnter = new UnityEvent();
 	public UnityEvent onTriggerStay = new UnityEvent();
 
@@ -15,7 +17,7 @@ public class CollisionTrigger : MonoBehaviour
 		if (hasBeenTriggered) return;
 
 		onTriggerEnter.Invoke();
-		hasBeenTriggered = true;
+		if (onlyTriggerOnce) hasBeenTriggered = true;
 	}
 
 	void OnTriggerStay2D(Collider2D other)

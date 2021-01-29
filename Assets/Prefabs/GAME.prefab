@@ -1366,6 +1366,7 @@ MonoBehaviour:
   timeBeatText: {fileID: 7460117117838787385}
   completionBeatText: {fileID: 2066027267493329181}
   tagBeatText: {fileID: 6741546686431629800}
+  background: {fileID: 4389705022428152619}
   cam: {fileID: 815013471264676710}
   PAUSED: 0
   timeLeft: 0
