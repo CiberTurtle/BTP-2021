@@ -75,11 +75,13 @@ public class Game : MonoBehaviour
 
 		inputs = new Inputs();
 		inputs.Game.Pause.performed += (x) => PAUSED = !PAUSED;
-#if UNITY_EDITOR
+
 		inputs.Game.ScreenShot.performed += (x) =>
 		{
 			ScreenCapture.CaptureScreenshot(Application.dataPath + "/Screen Shots/" + DateTime.Now.ToString("yyyy-mm-dd hh.mm.ss") + ".screenshot.png");
 		};
+
+#if UNITY_EDITOR
 		inputs.Game.UnlimitedTime.performed += (x) =>
 		{
 			unlimitedTime = !unlimitedTime;
@@ -90,14 +92,22 @@ public class Game : MonoBehaviour
 
 		timeLeft = timeToLive;
 
-		if (PlayerPrefs.GetInt("mode", 0) == 0)
+		switch (PlayerPrefs.GetInt("mode", 0))
 		{
-			timeText.gameObject.SetActive(false);
-			if (PlayerPrefs.GetInt("mode", 0) == 1)
+			case 0:
+				timeText.gameObject.SetActive(false);
 				completionText.gameObject.SetActive(false);
+				break;
+			case 1:
+				timeText.gameObject.SetActive(false);
+				break;
+			case 2: break;
+			case 3: break;
 		}
 
 		music.enabled = PlayerPrefs.GetInt("music", 1) == 1;
+
+		unlimitedTime = PlayerPrefs.GetInt("mode", 0) == 3;
 	}
 
 	void OnEnable() => inputs.Enable();
@@ -296,8 +306,7 @@ public class Game : MonoBehaviour
 
 		switch (PlayerPrefs.GetInt("mode", 0))
 		{
-			case 0:
-				break;
+			case 0: break;
 			case 1:
 				Leaderboards.current.AddNewHighscore(PlayerPrefs.GetString("name", "anonymous"), (int)timeAlive * 100, false);
 				break;
@@ -307,6 +316,7 @@ public class Game : MonoBehaviour
 				else
 					Leaderboards.current.AddNewHighscore(PlayerPrefs.GetString("name", "anonymous"), (int)timeAlive * 100, false);
 				break;
+			case 3: break;
 		}
 	}
 }

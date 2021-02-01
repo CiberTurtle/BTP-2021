@@ -90,6 +90,11 @@ public class Menu : MonoBehaviour
 		PlayerPrefs.SetInt("mode", 2);
 	}
 
+	public void PrepSandbox()
+	{
+		PlayerPrefs.SetInt("mode", 3);
+	}
+
 	public void OpenStart(bool open)
 	{
 		menu.SetActive(!open);

@@ -69,16 +69,21 @@ public class Leaderboards : MonoBehaviour
 		{
 			using (var all = UnityWebRequest.Get(Codes.webUrl + Codes.allPublicCode + "/pipe-score-asc/"))
 			{
-				yield return any.SendWebRequest();
-				yield return all.SendWebRequest();
-
-				if (!string.IsNullOrEmpty(any.downloadHandler.error) || !string.IsNullOrEmpty(all.downloadHandler.error))
-					Debug.LogError("Web Request Failed");
-
 				anyNames = new List<string>();
 				anyScores = new List<int>();
 				allNames = new List<string>();
 				allScores = new List<int>();
+
+				yield return any.SendWebRequest();
+				yield return all.SendWebRequest();
+
+				if (!string.IsNullOrEmpty(any.downloadHandler.error) || !string.IsNullOrEmpty(all.downloadHandler.error))
+				{
+					anyNames.Add("Error!");
+					allNames.Add("Error!");
+
+					Debug.LogError("Web Request Failed");
+				}
 
 				string[] anyLines = any.downloadHandler.text.Split(new char[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
 				foreach (var line in anyLines)

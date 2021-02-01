@@ -15,6 +15,7 @@ public class ExtraTime : MonoBehaviour
 	[SerializeField] float time = 10;
 	[SerializeField] float respawnTime = 60;
 	[Space]
+	[SerializeField] GameObject floatingText;
 	[SerializeField] Key[] sprites = new Key[0];
 
 	SpriteRenderer spr;
@@ -44,6 +45,8 @@ public class ExtraTime : MonoBehaviour
 		Game.current.AddTime(time);
 		spr.enabled = false;
 		col.enabled = false;
+
+		Instantiate(floatingText, transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity).transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text = $"+ {time}s";
 
 		if (respawnTime > 0) StartCoroutine(IRespawnTimmer());
 	}

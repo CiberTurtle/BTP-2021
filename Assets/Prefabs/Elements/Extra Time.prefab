@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fee03748fc79ba45af30e11080c18bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupDescription: Pickup
+  pickupDescription: Eat
   includeNameOfGO: 1
   onInteract:
     m_PersistentCalls:
@@ -78,6 +78,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 10
   respawnTime: 60
+  floatingText: {fileID: 1703801997992694145, guid: f690e075d21eabc4fbbc74fac700fde2, type: 3}
   sprites:
   - time: 3
     sprite: {fileID: 4910621133793461930, guid: 71b27c73e4c7dfd4da7e85ce4cd8f002, type: 3}
