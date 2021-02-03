@@ -44,6 +44,7 @@ public class Game : MonoBehaviour
 	[SerializeField] SpriteRenderer bgBase;
 	[SerializeField] SpriteRenderer bgOverlay;
 	[Space]
+	[SerializeField] AudioClip winSound;
 	[SerializeField] AudioSource music;
 	[Space]
 	[SerializeField] UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera cam;
@@ -107,7 +108,12 @@ public class Game : MonoBehaviour
 
 		music.enabled = PlayerPrefs.GetInt("music", 1) == 1;
 
-		unlimitedTime = PlayerPrefs.GetInt("mode", 0) == 3;
+		if (PlayerPrefs.GetInt("mode", 0) == 3)
+		{
+			timeLeftText.enabled = false;
+			timeLeftBar.transform.parent.gameObject.SetActive(false);
+			unlimitedTime = true;
+		}
 	}
 
 	void OnEnable() => inputs.Enable();
@@ -149,7 +155,7 @@ public class Game : MonoBehaviour
 		timeLeftText.text = Mathf.Round(timeLeft).ToString();
 		timeLeftText.color = color;
 
-		timeLeftBar.fillAmount = timeLeftFac;
+		timeLeftBar.fillAmount = Mathf.Lerp(timeLeftBar.fillAmount, timeLeftFac, 1f * Time.deltaTime * 10);
 		timeLeftBar.color = color;
 
 		timeText.text =
@@ -286,8 +292,10 @@ public class Game : MonoBehaviour
 	{
 		if (hasWon) return;
 
-		beatGameMenu.transform.DOScale(Vector3.one, 2f).SetDelay(0.5f).SetEase(Ease.InOutCirc).SetUpdate(true);
-		beatGameMenu.DOFade(1f, 2f).SetDelay(0.5f).SetEase(Ease.InOutCirc).SetUpdate(true)
+		PlaySound(winSound);
+
+		beatGameMenu.transform.DOScale(Vector3.one, 1.25f).SetDelay(0.9f).SetEase(Ease.OutBack).SetUpdate(true);
+		beatGameMenu.DOFade(1f, 1f).SetDelay(1f).SetEase(Ease.Linear).SetUpdate(true)
 		.OnComplete(() =>
 		{
 			beatGameMenu.interactable = true;
@@ -300,9 +308,15 @@ public class Game : MonoBehaviour
 
 		hasWon = true;
 		Time.timeScale = 0f;
+
+		timeLeftText.enabled = false;
+		timeLeftBar.transform.parent.gameObject.SetActive(false);
+		invContainer.gameObject.SetActive(false);
 		minimap.SetActive(false);
 		timeText.gameObject.SetActive(false);
 		completionText.gameObject.SetActive(false);
+		textbox.gameObject.SetActive(false);
+		itemBox.gameObject.SetActive(false);
 
 		switch (PlayerPrefs.GetInt("mode", 0))
 		{

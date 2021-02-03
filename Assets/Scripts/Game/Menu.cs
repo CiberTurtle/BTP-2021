@@ -62,6 +62,8 @@ public class Menu : MonoBehaviour
 
 		ToggleMusic();
 		ToggleMusic();
+
+		Time.timeScale = 1;
 	}
 
 	void Update()

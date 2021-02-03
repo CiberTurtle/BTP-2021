@@ -1142,7 +1142,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.67
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1468,6 +1468,7 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
+  hud: {fileID: 4389705022774271816}
   invContainer: {fileID: 4389705022302298559}
   pfInvSlot: {fileID: 119345089365444338, guid: 3b0289927e4fbae438613a23fb90e964, type: 3}
   minimap: {fileID: 4389705021183239801}
@@ -1488,6 +1489,7 @@ MonoBehaviour:
   tagBeatText: {fileID: 6741546686431629800}
   bgBase: {fileID: 4389705022428152619}
   bgOverlay: {fileID: 4394342168712724045}
+  winSound: {fileID: 8300000, guid: 9e565b0a44e74ce4097e7dbbb713876f, type: 3}
   music: {fileID: 9015131587888328544}
   cam: {fileID: 815013471264676710}
   PAUSED: 0
@@ -2918,7 +2920,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 99431017423204052, guid: a65ea2a0d59b7d5418cc29a6d99486c1, type: 3}
       propertyPath: m_Name
-      value: Text
+      value: Time Text
       objectReference: {fileID: 0}
     - target: {fileID: 3784505260218650402, guid: a65ea2a0d59b7d5418cc29a6d99486c1, type: 3}
       propertyPath: m_text
@@ -2926,7 +2928,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3784505260218650402, guid: a65ea2a0d59b7d5418cc29a6d99486c1, type: 3}
       propertyPath: m_fontSize
-      value: 64
+      value: 96
       objectReference: {fileID: 0}
     - target: {fileID: 3784505260218650402, guid: a65ea2a0d59b7d5418cc29a6d99486c1, type: 3}
       propertyPath: m_fontColor.b
@@ -2938,7 +2940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3784505260218650402, guid: a65ea2a0d59b7d5418cc29a6d99486c1, type: 3}
       propertyPath: m_fontSizeBase
-      value: 64
+      value: 96
       objectReference: {fileID: 0}
     - target: {fileID: 3784505260218650402, guid: a65ea2a0d59b7d5418cc29a6d99486c1, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -2982,11 +2984,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7437519360861497577, guid: a65ea2a0d59b7d5418cc29a6d99486c1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 128
+      value: 192
       objectReference: {fileID: 0}
     - target: {fileID: 7437519360861497577, guid: a65ea2a0d59b7d5418cc29a6d99486c1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 64
+      value: 96
       objectReference: {fileID: 0}
     - target: {fileID: 7437519360861497577, guid: a65ea2a0d59b7d5418cc29a6d99486c1, type: 3}
       propertyPath: m_LocalPosition.x

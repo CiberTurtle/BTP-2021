@@ -24,19 +24,21 @@ public class Portal : MonoBehaviour
 		{
 			if (gems.Count < 1)
 			{
-				circle.DOScale(new Vector3(100, 100, 1), 1f).SetEase(Ease.InExpo).SetUpdate(true).OnComplete(() => circle.localScale = new Vector3(1000, 1000, 1));
+				circle.DOScale(new Vector3(100, 100, 1), 2f).SetEase(Ease.InOutExpo).SetUpdate(true).OnComplete(() => circle.localScale = new Vector3(1000, 1000, 1));
 
 				Game.current.End();
 			}
-
-			foreach (var gem in gems)
+			else
 			{
-				if (Player.current.UseItem(gem))
+				foreach (var gem in gems)
 				{
-					gems.Remove(gem);
+					if (Player.current.UseItem(gem))
+					{
+						gems.Remove(gem);
 
-					if (gems.Count < 1)
-						GotAllGems();
+						if (gems.Count < 1)
+							GotAllGems();
+					}
 				}
 			}
 		}

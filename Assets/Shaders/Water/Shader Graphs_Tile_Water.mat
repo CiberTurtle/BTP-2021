@@ -42,10 +42,10 @@ Material:
     m_Floats:
     - AltTurnSpeed: 2.5
     - WaveSize: 0.05
-    - _WaveSpeed: 1.5
+    - _WaveSpeed: 3
     m_Colors:
     - FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - WaterAltFallSpeed: {r: 0.05, g: 0.1, b: 0, a: 0}
-    - WaterFallSpeed: {r: 0, g: 0.25, b: 0, a: 0}
+    - WaterFallSpeed: {r: 0, g: 0.5, b: 0, a: 0}
     - _MainColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

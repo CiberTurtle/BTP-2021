@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
 
 		foreach (var item in Physics2D.OverlapCircleAll(transform.position, interactionSize, interactableLayer))
 		{
-			var dist = Vector2.SqrMagnitude(transform.position + item.transform.position);
+			var dist = Vector2.SqrMagnitude(transform.position - item.transform.position);
 			if (dist < closestDist)
 			{
 				closestItem = item;

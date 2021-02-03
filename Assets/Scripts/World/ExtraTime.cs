@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using DG.Tweening;
 
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Collider2D))]
 public class ExtraTime : MonoBehaviour
 {
 	[System.Serializable]
@@ -15,18 +15,17 @@ public class ExtraTime : MonoBehaviour
 	[SerializeField] float time = 10;
 	[SerializeField] float respawnTime = 60;
 	[Space]
+	[SerializeField] GameObject disable;
+	[SerializeField] SpriteRenderer item;
+	[SerializeField] SpriteRenderer dot;
+	[Space]
 	[SerializeField] GameObject floatingText;
 	[SerializeField] Key[] sprites = new Key[0];
-
-	SpriteRenderer spr;
 	Collider2D col;
-	SpriteRenderer dot;
 
 	void Awake()
 	{
-		spr = GetComponent<SpriteRenderer>();
 		col = GetComponent<Collider2D>();
-		dot = transform.GetChild(0).GetComponent<SpriteRenderer>();
 
 		dot.color = new Color(1, 1, 1, 0);
 	}
@@ -36,15 +35,19 @@ public class ExtraTime : MonoBehaviour
 		foreach (var sprite in sprites)
 		{
 			if (sprite.time <= time)
-				GetComponent<SpriteRenderer>().sprite = sprite.sprite;
+			{
+				gameObject.name = sprite.sprite.name;
+				item.sprite = sprite.sprite;
+			}
 		}
 	}
 
 	public void Pickup()
 	{
 		Game.current.AddTime(time);
-		spr.enabled = false;
 		col.enabled = false;
+
+		disable.SetActive(false);
 
 		Instantiate(floatingText, transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity).transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text = $"+ {time}s";
 
@@ -63,7 +66,7 @@ public class ExtraTime : MonoBehaviour
 		.OnComplete(() => pop = dot.transform.DOScale(new Vector3(0.5f, 0.5f, 1), 0.75f).SetEase(Ease.OutElastic));
 
 		yield return new WaitForSeconds(respawnTime);
-		spr.enabled = true;
+		disable.SetActive(true);
 		col.enabled = true;
 
 		if (pop != null) pop.Kill();
