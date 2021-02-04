@@ -100,7 +100,7 @@ public class Game : MonoBehaviour
 				completionText.gameObject.SetActive(false);
 				break;
 			case 1:
-				timeText.gameObject.SetActive(false);
+				completionText.gameObject.SetActive(false);
 				break;
 			case 2: break;
 			case 3: break;
