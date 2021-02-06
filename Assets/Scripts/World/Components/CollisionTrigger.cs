@@ -26,4 +26,11 @@ public class CollisionTrigger : MonoBehaviour
 
 		onTriggerStay.Invoke();
 	}
+
+	void OnDrawGizmos()
+	{
+		Gizmos.color = new Color(1, 0, 0, 0.25f);
+
+		Gizmos.DrawCube(transform.position, transform.localScale);
+	}
 }

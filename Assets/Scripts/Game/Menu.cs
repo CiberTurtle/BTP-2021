@@ -9,6 +9,7 @@ public class Menu : MonoBehaviour
 	[SerializeField] GameObject menu;
 	[SerializeField] GameObject startMenu;
 	[SerializeField] GameObject leaderboardsMenu;
+	[SerializeField] GameObject how2PlayMenu;
 	[SerializeField] GameObject settingsMenu;
 	[Space]
 	[SerializeField] GameObject pfEntry;
@@ -101,6 +102,12 @@ public class Menu : MonoBehaviour
 	{
 		menu.SetActive(!open);
 		startMenu.SetActive(open);
+	}
+
+	public void OpenHow2Play(bool open)
+	{
+		menu.SetActive(!open);
+		how2PlayMenu.SetActive(open);
 	}
 
 	public void OpenSettings(bool open)

@@ -30,7 +30,7 @@ public class Portal : MonoBehaviour
 			}
 			else
 			{
-				foreach (var gem in gems)
+				foreach (var gem in gems.ToArray())
 				{
 					if (Player.current.UseItem(gem))
 					{

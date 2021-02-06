@@ -35,7 +35,7 @@ public class FetchQuest : MonoBehaviour
 
 	NPCState state = NPCState.HasNotStarted;
 
-	void OnEnable()
+	void Start()
 	{
 		if (countTowardsCompletion)
 		{

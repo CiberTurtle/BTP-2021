@@ -41,6 +41,9 @@ public class Game : MonoBehaviour
 	[SerializeField] TMP_Text completionBeatText;
 	[SerializeField] TMP_Text tagBeatText;
 	[Space]
+	[SerializeField] Image deathBG;
+	[SerializeField] Transform deathCover;
+	[Space]
 	[SerializeField] SpriteRenderer bgBase;
 	[SerializeField] SpriteRenderer bgOverlay;
 	[Space]
@@ -144,7 +147,7 @@ public class Game : MonoBehaviour
 		timeAlive += Time.deltaTime;
 
 		if (timeLeft < 0)
-			Restart();
+			Restart(true);
 
 		if (!unlimitedTime)
 			timeLeft -= Time.deltaTime;
@@ -191,7 +194,9 @@ public class Game : MonoBehaviour
 		{
 			var box = Instantiate(pfInvSlot, invContainer).transform.GetChild(0).GetComponent<Image>();
 			box.sprite = item.sprite;
-			box.DOColor(Color.white, (index + 1) * 0.1f).SetEase(Ease.OutExpo);
+			box.transform.localScale = Vector3.zero;
+			box.transform.DOScale(Vector3.one, 0.5f).SetDelay((index) * 0.05f)
+			.SetEase(index == Player.current.inv.Count - 1 && Player.current.inv.Count > Player.current.lastInvSize ? Ease.OutElastic : Ease.OutBack);
 
 			index++;
 		}
@@ -278,9 +283,23 @@ public class Game : MonoBehaviour
 		PAUSED = false;
 	}
 
-	public void Restart()
+	public void Restart(bool isNatral = false)
 	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		hasWon = true;
+
+		HideAllHUD();
+
+		Player.current.gameObject.SetActive(false);
+
+		if (isNatral)
+		{
+			deathBG.DOColor(Color.black, 0.75f).SetEase(Ease.Linear).SetUpdate(true);
+			deathCover.DOScale(Vector3.one * 2f, 2f).SetEase(Ease.OutSine).SetUpdate(true).OnComplete(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex));
+		}
+		else
+		{
+			SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		}
 	}
 
 	public void Exit()
@@ -309,14 +328,7 @@ public class Game : MonoBehaviour
 		hasWon = true;
 		Time.timeScale = 0f;
 
-		timeLeftText.enabled = false;
-		timeLeftBar.transform.parent.gameObject.SetActive(false);
-		invContainer.gameObject.SetActive(false);
-		minimap.SetActive(false);
-		timeText.gameObject.SetActive(false);
-		completionText.gameObject.SetActive(false);
-		textbox.gameObject.SetActive(false);
-		itemBox.gameObject.SetActive(false);
+		HideAllHUD();
 
 		switch (PlayerPrefs.GetInt("mode", 0))
 		{
@@ -332,5 +344,17 @@ public class Game : MonoBehaviour
 				break;
 			case 3: break;
 		}
+	}
+
+	private void HideAllHUD()
+	{
+		timeLeftText.enabled = false;
+		timeLeftBar.transform.parent.gameObject.SetActive(false);
+		invContainer.gameObject.SetActive(false);
+		minimap.SetActive(false);
+		timeText.gameObject.SetActive(false);
+		completionText.gameObject.SetActive(false);
+		textbox.gameObject.SetActive(false);
+		itemBox.gameObject.SetActive(false);
 	}
 }

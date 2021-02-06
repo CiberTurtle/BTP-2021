@@ -318,6 +318,7 @@ MonoBehaviour:
   interactableText: {fileID: 1186869198867311754}
   art: {fileID: 2665524342513250087}
   inv: []
+  lastInvSize: 0
 --- !u!114 &2665524342415580798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +337,7 @@ MonoBehaviour:
   fMoveSpeed: 8
   fAccelerationTimeGrounded: 0.05
   fAccelerationTimeAirborne: 0.1
-  fJumpRem: 0.1
+  fJumpRem: 0.15
   fGroundedRem: 0.2
   fWallSlideSpeedMax: 3
   fWallStickTime: 0.25

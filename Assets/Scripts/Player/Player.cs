@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
 	// Data
 	[Space]
 	public List<SOItem> inv = new List<SOItem>();
+	[HideInInspector] public int lastInvSize = 0;
 	Interactable interactableObj;
 	float baseSizeX = 1;
 	Vector3 targetSquish;
@@ -119,6 +120,7 @@ public class Player : MonoBehaviour
 
 	public void AddItem(SOItem item)
 	{
+		lastInvSize = inv.Count;
 		inv.Add(item);
 		Game.current.DisplayItemBox(item);
 		Game.current.UpdateHUD();
